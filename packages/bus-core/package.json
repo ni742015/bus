@@ -1,0 +1,54 @@
+{
+  "name": "bus",
+  "version": "0.0.1",
+  "description": "",
+  "bin": {
+    "bus": "bin/bus"
+  },
+  "main": "index.js",
+  "scripts": {
+    "build": "babel server --out-dir dist",
+    "start": "nodemon bin/www",
+    "dev": "npm start",
+    "test": "cross-env NODE_ENV=test nodemon bin/www",
+    "pro": "cross-env NODE_ENV=production nodemon bin/www",
+    "prd": "pm2 start bin/www",
+    "lint": "eslint --fix ./"
+  },
+  "dependencies": {
+    "glob": "^7.1.2",
+    "jsonwebtoken": "^8.2.0",
+    "koa": "^2.2.0",
+    "koa-bodyparser": "^3.2.0",
+    "koa-json": "^2.0.2",
+    "koa-onerror": "^1.2.1",
+    "koa-router": "^7.1.1",
+    "koa-static": "^3.0.0",
+    "koa-swagger-decorator": "1.4.3",
+    "koa2-cors": "^2.0.5",
+    "log4js": "^1.1.1",
+    "mongoose": "^5.2.4"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.2",
+    "babel-preset-bus": "^0.0.1",
+    "chalk": "^2.4.1",
+    "commander": "^2.17.1",
+    "cross-env": "^5.2.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "inquirer": "^6.2.0",
+    "json-loader": "^0.5.7",
+    "nodemon": "^1.18.4",
+    "ora": "^3.0.0",
+    "source-map-support": "^0.5.9",
+    "webpack": "^4.19.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "resolutions": {
+    "babel-core": "7.0.0-bridge.0"
+  }
+}
