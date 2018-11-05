@@ -1,0 +1,14 @@
+{
+  "name": "bus-examples-base",
+  "version": "0.0.1",
+  "scripts": {
+    "start": "node ./build/main.js",
+    "dev": "bus dev",
+    "build": "bus build",
+    "postinstall": "bus build"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bus": "^0.0.1"
+  }
+}

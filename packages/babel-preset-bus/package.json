@@ -1,5 +1,5 @@
 {
-  "name": "babel-preset-bus",
+  "name": "@babel/preset-bus",
   "version": "0.0.1",
   "description": "Babel preset for Bus",
   "main": "index.js",
@@ -12,11 +12,15 @@
     "babel",
     "es6",
     "node",
-    "backpack"
+    "bus"
+  ],
+  "files": [
+    "index.js"
   ],
   "dependencies": {
     "@babel/core": "^7.1.0",
     "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-proposal-decorators": "^7.1.0",
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-modules-commonjs": "^7.1.0",
     "@babel/plugin-transform-parameters": "^7.1.0",
@@ -25,5 +29,6 @@
     "@babel/preset-env": "^7.1.0",
     "@babel/runtime": "^7.0.0",
     "babel-loader": "^8.0.2"
-  }
+  },
+  "gitHead": "5d1206c258c250c284151b3df16d527defbd1b1a"
 }
