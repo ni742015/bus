@@ -8,8 +8,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --config ./webpack.config.js"
-	},
-	"files": [
+  },
+  "files": [
     "bin",
     "lib",
     "commands",
