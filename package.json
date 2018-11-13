@@ -1,6 +1,5 @@
 {
   "private": true,
-  "name": "bus",
   "version": "0.0.1",
   "description": "Bus is a system for Node.js",
   "author": "Yohann",
@@ -8,6 +7,8 @@
     "lerna": "^3.4.0"
   },
   "workspaces": [
-    "packages/*"
-  ]
+    "packages/*",
+    "examples/*"
+  ],
+  "dependencies": {}
 }

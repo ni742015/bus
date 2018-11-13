@@ -4,11 +4,10 @@
 const http = require('http')
 
 module.exports = function (app) {
-	let {port, hostname} = this.config
+	let {port} = this.config
 
 	// 将端口号设置为配置文件的端口号，默认值为3000
 	port = normalizePort(port || '3000')
-	console.log('port =' + port)
 
 	/**
  * Normalize a port into a number, string, or false.
@@ -89,7 +88,7 @@ module.exports = function (app) {
 			onListening()
 			resolve(app)
 		})
-		server.listen(port, hostname)
+		server.listen(port)
 	})
 
 }

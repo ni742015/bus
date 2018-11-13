@@ -88,7 +88,7 @@ module.exports = ({
 			const rows = await model
 				.find(find)
 				.paging(ctx.query)
-			const total = await model.count(find)
+			const total = await model.countDocuments(find)
 			ctx.body = {
 				rows,
 				total,

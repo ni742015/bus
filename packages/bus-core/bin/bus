@@ -24,13 +24,6 @@ program
 	})
 
 program
-  .command('start')
-  .description('start project')
-  .action(() => {
-    require(res('start'))
-  })
-
-program
   .command('build')
   .description('build project')
   .action(() => {

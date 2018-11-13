@@ -10,7 +10,7 @@ const api_middleware = require('./middlewares/api')
 // 优化错误提示
 onerror(app)
 
-module.exports = function (routers) {
+module.exports = function (router) {
 	app.use(cors())
 
 	// middlewares
@@ -30,10 +30,10 @@ module.exports = function (routers) {
 
 
 	//添加格式化处理响应结果的中间件，在添加路由之前调用 (仅对/api开头的url进行格式化处理)
-	app.use(api_middleware)
+	app.use(api_middleware.bind(this))
 
 	// routes
-	app.use(routers.routes(), routers.allowedMethods())
+	app.use(router.routes(), router.allowedMethods())
 
 	// error-handling
 	app.on('error', errorHandel)

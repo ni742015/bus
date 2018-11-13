@@ -1,5 +1,4 @@
 module.exports = ({
-	CommonClass,
 	example,
 	models,
 	tag,
@@ -17,9 +16,13 @@ module.exports = ({
 	ApiErrorNames
 }) => {
 	const userModel = models.user
+
+
 	return {
 		name: 'user',
 		needCommonApi: true,
-		ApiClass: class User {}
+		ApiClass: class User {
+			
+		}
 	}
 }

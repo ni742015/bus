@@ -9,36 +9,6 @@ function resolve(filePath) {
 }
 const config = require(resolve('./index'))
 
-
-class ImportPlugin {
-	apply (compiler) {
-		compiler.hooks('emit', (compilation, callback) => {
-			console.log('--PathTransfor emit')
-			// 遍历所有资源文件
-			for (var filePathName in compilation.assets) {
-				console.log('filePathName', filePathName)
-
-				// 查看对应的文件是否符合指定目录下的文件
-				if (/index\.js/i.test(filePathName)) {
-					// 获取文件内容
-					let content = compilation.assets[filePathName].source() || ''
-
-					content = content.replace(/ROOT/, process.cwd())
-					// 重写指定输出模块内容
-					compilation.assets[filePathName] = {
-						source () {
-							return content
-						},
-						size () {
-							return content.length
-						}
-					}
-				}
-			}
-			callback()
-		})
-	}
-}
 // This is the Webpack configuration. It is focused on developer experience and
 // fast rebuilds.
 module.exports = options => {
@@ -71,7 +41,7 @@ module.exports = options => {
 		// The benefit of Webpack over just using babel-cli or babel-node command is
 		// sourcemap support. Although it slows down compilation, it makes debugging
 		// dramatically easier.
-		devtool: 'source-map',
+		devtool: options.sourcemap === undefined ? 'source-map' : options.sourcemap,
 		// Webpack allows you to define externals - modules that should not be bundled.
 		// When bundling with Webpack for the backend - you usually don't want to
 		// bundle its node_modules dependencies. This creates an externals function that
@@ -107,12 +77,12 @@ module.exports = options => {
 			__filename: true,
 			__dirname: true
 		},
-		entry: {
-			main: [resolve('../start.js')]
+		entry: options.entry || {
+			main: [`${config.serverSrcPath}/index.js`]
 		},
 		// This sets the default output file path, name, and compile target module type.
 		// Since we are focused on Node.js, the libraryTarget is set to CommonJS2
-		output: {
+		output: options.output || {
 			path: config.serverBuildPath,
 			filename: '[name].js',
 			sourceMapFilename: '[name].map',
@@ -176,13 +146,7 @@ module.exports = options => {
 			// Bus its human-readable error messages.
 			new FriendlyErrorsWebpackPlugin({
 				clearConsole: options.env === 'development'
-			}),
-			new webpack.NormalModuleReplacementPlugin(
-				/^ROOT/,
-				function(resource) {
-					resource.request = resource.request.replace(/^ROOT/, process.cwd())
-				}
-			)
+			})
 		]
 	}
 }

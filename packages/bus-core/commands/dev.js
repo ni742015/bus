@@ -2,7 +2,7 @@
 const webpack = require('webpack')
 const nodemon = require('nodemon')
 const once = require('ramda').once
-const defaultConfig = require('../server/config/webpack.config')
+const defaultConfig = require('../src/config/webpack.config')
 const path = require('path')
 const fs = require('fs')
 
