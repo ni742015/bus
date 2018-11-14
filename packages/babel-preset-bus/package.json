@@ -1,6 +1,6 @@
 {
-  "name": "@babel/preset-bus",
-  "version": "0.1.0-alpha.1",
+  "name": "babel-preset-bus",
+  "version": "0.1.5",
   "description": "Babel preset for Bus",
   "main": "index.js",
   "scripts": {

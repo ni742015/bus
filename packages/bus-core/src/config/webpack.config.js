@@ -25,7 +25,7 @@ module.exports = options => {
 	} else {
 		mainBabelOptions
 			.presets
-			.push(require('@babel/preset-bus'))
+			.push(require('babel-preset-bus'))
 	}
 
 	return {
