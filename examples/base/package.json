@@ -10,5 +10,6 @@
   "license": "MIT",
   "dependencies": {
     "bus": "^0.1.0-alpha.0"
-  }
+  },
+  "gitHead": "25ad52a61094f6160327183a3af5f881650ff28a"
 }

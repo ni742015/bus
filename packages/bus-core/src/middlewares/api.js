@@ -21,8 +21,10 @@ module.exports = async function(ctx, next) {
 
 					let token = ctx.request.header['authorization'].split(' ')[1] // Bearer xxx
 
+					console.log('Token', Token)
 					// 解码token
-					const decoded = Token.decode(token)
+					const decoded = Token.decode({token})
+
 					console.log('decoded', decoded)
 
 					if(!decoded) {

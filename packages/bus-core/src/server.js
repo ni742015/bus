@@ -8,6 +8,7 @@ module.exports = function (app) {
 
 	// 将端口号设置为配置文件的端口号，默认值为3000
 	port = normalizePort(port || '3000')
+	console.log('port', port)
 
 	/**
  * Normalize a port into a number, string, or false.
@@ -34,6 +35,8 @@ module.exports = function (app) {
  */
 
 	function onError(error) {
+		console.log('onError', error)
+
 		if (error.syscall !== 'listen') {
 			throw error
 		}
@@ -80,9 +83,9 @@ module.exports = function (app) {
 	 */
 
 	return new Promise((resolve, reject) => {
-		server.on('error', function () {
-			onError()
-			reject()
+		server.on('error', function (error) {
+			onError(error)
+			reject(error)
 		})
 		server.on('listening', function () {
 			onListening()

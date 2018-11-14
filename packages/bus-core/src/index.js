@@ -3,6 +3,7 @@ const httpServer = require('./server')
 const router = require('koa-router')()
 const defaultConfig = require('./config')
 const Token = require('./utils/token')
+const Mongo = require('./utils/mongodb')
 
 module.exports = class Server {
 	// hooks
@@ -19,6 +20,7 @@ module.exports = class Server {
 	}
 
 	initMongo = async () => {
+		Mongo.init(this.config.mongodb)
 		const {schemas, examples} = await this.Schema.init(this)
 		this.schemas = schemas
 		this.examples = examples
@@ -28,6 +30,8 @@ module.exports = class Server {
 	}
 
 	initRouter = async () => {
+		console.log('initRouter')
+
 		let {secret, excludeCheckUrl} = this.config
 		this.Token = new Token({secret, rules: excludeCheckUrl})
 
@@ -36,11 +40,10 @@ module.exports = class Server {
 	}
 
 	initApp = async () => {
-		console.log('initApp')
-
 		await this.initMongo()
 		await this.initRouter()
 
+		console.log('initApp')
 		return App.call(this, this.router)
 	}
 
@@ -48,6 +51,7 @@ module.exports = class Server {
 		console.log('start')
 		this.app = await this.initApp()
 
+		console.log('start server')
 		return httpServer.call(this, this.app)
 	}
 }

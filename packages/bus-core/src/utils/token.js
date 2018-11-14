@@ -32,8 +32,6 @@ class Token {
 	}
 
 	checkUrl = ({url, method}) => {
-		console.log('this.rules', this.rules)
-
 		return url.indexOf('swagger-') < 0 && !unless({url, method}, this.rules)
 	}
 

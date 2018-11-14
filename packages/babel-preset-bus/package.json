@@ -30,5 +30,5 @@
     "@babel/runtime": "^7.0.0",
     "babel-loader": "^8.0.2"
   },
-  "gitHead": "5d1206c258c250c284151b3df16d527defbd1b1a"
+  "gitHead": "25ad52a61094f6160327183a3af5f881650ff28a"
 }

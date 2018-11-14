@@ -88,7 +88,7 @@ class Api {
 					})
 				// console.log(Object.getOwnPropertyNames(ApiClass))
 
-				router.map(Object.assign(ApiClass))
+				router.map(ApiClass)
 			}
 
 			return router

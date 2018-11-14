@@ -7,7 +7,7 @@ function resolve(filePath) {
 
 const config = defaultConfig({
 	env: 'prroduction',
-	sourcemap: false,
+	// sourcemap: false,
 	entry: {
 		index: resolve('./src/index.js'),
 		api: resolve('./src/apis/index.js'),

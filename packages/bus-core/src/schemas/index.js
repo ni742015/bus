@@ -25,6 +25,7 @@ class Schema {
 	init = async () => {
 		try {
 			let schemas = {}, examples = {}
+			// console.log('this.datas', this.datas)
 
 			for (const {name, schema} of this.datas) {
 				let data = Object.assign({

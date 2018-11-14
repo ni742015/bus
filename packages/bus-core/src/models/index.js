@@ -1,4 +1,4 @@
-const mongoose = require('../utils/mongodb')
+const mongoose = require('mongoose')
 const helpers = require('./helpers')
 
 class Models {
