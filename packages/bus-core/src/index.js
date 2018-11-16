@@ -9,13 +9,14 @@ module.exports = class Server {
 	// hooks
 	// onInitSchema, onInitModels
 
-	constructor({config, Model, Schema, Api}) {
+	constructor({config, Model, Schema, Api, hooks = {}}) {
 		// 设置config
 		this.config = config ? Object.assign(defaultConfig, config) : defaultConfig
 		this.router = router
 		this.Model = Model
 		this.Schema = Schema
 		this.Api = Api
+		this.hooks = hooks
 		// console.log('constructor', this.config)
 	}
 

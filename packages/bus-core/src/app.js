@@ -11,29 +11,35 @@ const api_middleware = require('./middlewares/api')
 onerror(app)
 
 module.exports = function (router) {
-	app.use(cors())
+	let middlewares = [
+		cors(),
+		bodyparser({
+			enableTypes:['json', 'form']
+		}),
+		json(),
+		async (ctx, next) => {
+			const start = new Date()
+			await next()
+			const ms = new Date() - start
+			console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+		},
+		api_middleware.bind(this),
+		[router.routes(), router.allowedMethods()]
+	]
 
-	// middlewares
-	app.use(bodyparser({
-		enableTypes:['json', 'form']
-	}))
-	app.use(json())
-	// app.use(require('koa-static')(__dirname + '/public'))
+	if(this.hooks.initMiddlewares) {
+		middlewares = this.hooks.initMiddlewares(middlewares, app) || middlewares
+	}
 
-	// logger
-	app.use(async (ctx, next) => {
-		const start = new Date()
-		await next()
-		const ms = new Date() - start
-		console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-	})
+	console.log('middlewares', middlewares)
 
-
-	//添加格式化处理响应结果的中间件，在添加路由之前调用 (仅对/api开头的url进行格式化处理)
-	app.use(api_middleware.bind(this))
-
-	// routes
-	app.use(router.routes(), router.allowedMethods())
+	for (const md of middlewares) {
+		if(Object.prototype.toString.call(md) === '[object Array]') {
+			app.use.apply(app, md)
+		} else {
+			app.use(md)
+		}
+	}
 
 	// error-handling
 	app.on('error', errorHandel)
