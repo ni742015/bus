@@ -1,6 +1,6 @@
 {
   "name": "bus-core",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "",
   "bin": {
     "bus": "bin/bus"
@@ -17,7 +17,16 @@
     "webpack.config.js"
   ],
   "dependencies": {
+    "@babel/core": "^7.1.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.2",
+    "babel-preset-bus": "^0.1.6",
+    "chalk": "^2.4.1",
+    "commander": "^2.17.1",
+    "cross-env": "^5.2.0",
+    "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.2",
+    "json-loader": "^0.5.7",
     "jsonwebtoken": "^8.2.0",
     "koa": "^2.2.0",
     "koa-bodyparser": "^4.2.1",
@@ -28,16 +37,7 @@
     "koa-swagger-decorator": "1.5.11",
     "koa2-cors": "^2.0.5",
     "log4js": "^3.0.5",
-		"mongoose": "^5.2.4",
-		"@babel/core": "^7.1.0",
-    "babel-preset-bus": "^0.1.6",
-    "babel-core": "^7.0.0-bridge.0",
-    "babel-loader": "^8.0.2",
-    "chalk": "^2.4.1",
-    "commander": "^2.17.1",
-    "cross-env": "^5.2.0",
-    "friendly-errors-webpack-plugin": "^1.7.0",
-    "json-loader": "^0.5.7",
+    "mongoose": "^5.2.4",
     "nodemon": "^1.18.4",
     "ora": "^3.0.0",
     "source-map-support": "^0.5.9",
