@@ -14,7 +14,10 @@
     "lib",
     "commands",
     "src",
-    "webpack.config.js"
+		"webpack.config.js",
+		"api.js",
+		"model.js",
+		"scheam.js"
   ],
   "dependencies": {
     "@babel/core": "^7.1.0",

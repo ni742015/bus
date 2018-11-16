@@ -128,6 +128,7 @@ module.exports = options => {
 			// __DEV__ as a global variable accordingly.
 			new webpack.DefinePlugin({
 				'process.env.NODE_ENV': JSON.stringify(options.env),
+				'process.env.PUBLISH_ENV': JSON.stringify(options.publish_env),
 				__DEV__: options.env === 'development'
 			}),
 			// In order to provide sourcemaps, we automagically insert this at the top of

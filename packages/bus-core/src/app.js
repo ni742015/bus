@@ -31,8 +31,6 @@ module.exports = function (router) {
 		middlewares = this.hooks.initMiddlewares(middlewares, app) || middlewares
 	}
 
-	console.log('middlewares', middlewares)
-
 	for (const md of middlewares) {
 		if(Object.prototype.toString.call(md) === '[object Array]') {
 			app.use.apply(app, md)

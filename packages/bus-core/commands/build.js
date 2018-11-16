@@ -7,7 +7,8 @@ const fs = require('fs')
 process.on('SIGINT', process.exit)
 
 const options = {
-	env: process.env.NODE_ENV || 'production'
+	env: process.env.NODE_ENV || 'production',
+	publish_env: process.env.PUBLISH_ENV || 'production',
 }
 
 const configPath = path.resolve('bus.config.js')
