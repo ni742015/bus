@@ -4,6 +4,7 @@ const router = require('koa-router')()
 const defaultConfig = require('./config')
 const Token = require('./utils/token')
 const Mongo = require('./utils/mongodb')
+const _Model = require('./models')
 
 module.exports = class Server {
 	// hooks
@@ -13,7 +14,7 @@ module.exports = class Server {
 		// 设置config
 		this.config = config ? Object.assign(defaultConfig, config) : defaultConfig
 		this.router = router
-		this.Model = Model
+		this.Model = Model || new _Model() // 可能没有model
 		this.Schema = Schema
 		this.Api = Api
 		this.hooks = hooks
@@ -26,8 +27,7 @@ module.exports = class Server {
 		this.schemas = schemas
 		this.examples = examples
 
-		const models = await this.Model.init(this)
-		this.models = models
+		this.models = await this.Model.init(this)
 	}
 
 	initRouter = async () => {

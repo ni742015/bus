@@ -27,8 +27,8 @@ module.exports = function (router) {
 		[router.routes(), router.allowedMethods()]
 	]
 
-	if(this.hooks.initMiddlewares) {
-		middlewares = this.hooks.initMiddlewares(middlewares, app) || middlewares
+	if(this.hooks.onInitMiddlewares) {
+		middlewares = this.hooks.onInitMiddlewares(middlewares, app) || middlewares
 	}
 
 	for (const md of middlewares) {

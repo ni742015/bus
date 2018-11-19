@@ -21,21 +21,21 @@ module.exports = async function(ctx, next) {
 
 					let token = ctx.request.header['authorization'].split(' ')[1] // Bearer xxx
 
-					console.log('Token', Token)
+					// console.log('Token', Token)
 					// 解码token
-					const decoded = Token.decode({token})
+					const decode = Token.decode({token})
 
-					console.log('decoded', decoded)
+					// console.log('decode', decode)
 
-					if(!decoded) {
+					if(!decode) {
 						throw new ApiError(null, 401, 'Auth failed')
 					}
 
-					if(this.onTokenCheck) {
-						ctx.state = this.onTokenCheck(decoded)
+					if(this.hooks.onTokenCheck) {
+						ctx.state = this.hooks.onTokenCheck(decode)
 					}
 
-					ctx.state = ctx.state || decoded
+					ctx.state = ctx.state || decode
 
 				} else {
 					throw new ApiError(null, 401, 'There is no token')

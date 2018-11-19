@@ -12,7 +12,7 @@ class Models {
 		this.datas.push(data)
 	}
 
-	init = async ({schemas}) => {
+	init = async ({schemas, hooks}) => {
 		try {
 			const models = {}
 
@@ -37,8 +37,8 @@ class Models {
 				}
 
 				// hook
-				if(this.onInitModels) {
-					let formatedSchema = await this.onInitModels(name, Schema)
+				if(hooks.onInitModels) {
+					let formatedSchema = await hooks.onInitModels(name, Schema)
 					Schema = formatedSchema ? formatedSchema : Schema
 				}
 

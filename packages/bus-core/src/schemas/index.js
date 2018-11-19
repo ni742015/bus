@@ -22,7 +22,7 @@ class Schema {
 		this.datas.push(data)
 	}
 
-	init = async () => {
+	init = async ({hooks}) => {
 		try {
 			let schemas = {}, examples = {}
 			// console.log('this.datas', this.datas)
@@ -50,8 +50,8 @@ class Schema {
 				}, schema)
 
 				// hook
-				if(this.onInitSchema) {
-					let formatedData = await this.onInitSchema(name, data)
+				if(hooks.onInitSchema) {
+					let formatedData = await hooks.onInitSchema(name, data)
 					data = formatedData ? formatedData : data
 				}
 

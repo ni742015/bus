@@ -15,7 +15,7 @@ class Api {
 		this.datas.push(data)
 	}
 
-	init = async ({ models, examples, config }) => {
+	init = async ({ models, examples, hooks, config }) => {
 		try {
 			console.log('config.apiPrefix', config.apiPrefix)
 
@@ -55,7 +55,7 @@ class Api {
 				const tag = decorator.tags([tagName])
 				let CommonClass = {}
 
-				const {name, needCommonApi, ApiClass} = apiClass({
+				let args = {
 					utils,
 					examples,
 					models,
@@ -63,7 +63,13 @@ class Api {
 					decorator,
 					ApiError,
 					ApiErrorNames
-				})
+				}
+
+				if(hooks.onInitApi) {
+					await hooks.onInitApi(name, apiClass, args)
+				}
+
+				const {name, needCommonApi, ApiClass} = apiClass(args)
 
 				// 增加继承默认接口
 				if(needCommonApi) {
