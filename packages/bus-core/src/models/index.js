@@ -5,6 +5,7 @@ class Models {
 	constructor(props = {}) {
 		this.onInitModels = props.onInitModels
 		this.datas = []
+		this.models = {}
 	}
 
 	// data {name: '', model: {}}
@@ -24,7 +25,7 @@ class Models {
 				// 用model拓展Schema
 				for(const {name: m_name, model} of this.datas) {
 					if(name === m_name) {
-						model(Schema)
+						model(Schema, models)
 					}
 				}
 
@@ -45,6 +46,7 @@ class Models {
 				models[name] = mongoose.model(name.replace(/^\S/, s => s.toUpperCase()), Schema)
 			}
 
+			this.models = models
 			return models
 		} catch (error) {
 			console.warn('Init Models Error', error)
