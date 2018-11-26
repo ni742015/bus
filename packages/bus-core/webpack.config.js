@@ -6,13 +6,15 @@ function resolve(filePath) {
 }
 
 const config = defaultConfig({
-	env: 'prroduction',
+	env: 'production',
 	// sourcemap: false,
 	entry: {
 		index: resolve('./src/index.js'),
 		api: resolve('./src/apis/index.js'),
 		model: resolve('./src/models/index.js'),
 		schema: resolve('./src/schemas/index.js'),
+		'lib/error': resolve('./src/utils/error/apiError.js'),
+		'lib/token': resolve('./src/utils/token.js')
 	},
 	output: {
 		path: resolve(''),

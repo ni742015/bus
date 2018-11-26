@@ -2,8 +2,8 @@ const router = require('koa-router')()
 const decorator = require('koa-swagger-decorator')
 const utils = require('../utils/index.js')
 const commonClass = require('./common.js')
-const ApiError = require('../utils/error/ApiError')
-const ApiErrorNames = require('../utils/error/ApiErrorNames')
+const ApiError = require('../utils/error/apiError')
+const ApiErrorNames = require('../utils/error/apiErrorNames')
 
 class Api {
 	constructor() {

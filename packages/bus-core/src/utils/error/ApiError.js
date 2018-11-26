@@ -1,4 +1,4 @@
-const ApiErrorNames = require('./ApiErrorNames')
+const ApiErrorNames = require('./apiErrorNames')
 
 /**
  * 自定义Api异常

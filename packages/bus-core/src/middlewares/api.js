@@ -5,12 +5,12 @@
  */
 
 const { filter_request_body } = require('../utils/index.js')
-const ApiError = require('../utils/error/ApiError')
+const ApiError = require('../utils/error/apiError')
 // const logUtil = require('../utils/log')
 
 module.exports = async function(ctx, next) {
 	try {
-		let apiPrefix = this.config.apiPrefix
+		let {config: {apiPrefix}, hooks: {beforeApiEnter}} = this
 
 		if(new RegExp(`^/${apiPrefix}`).test(ctx.url)) {
 			let Token = this.Token
@@ -41,23 +41,27 @@ module.exports = async function(ctx, next) {
 					throw new ApiError(null, 401, 'There is no token')
 				}
 			}
+
 			// 去除不要的参数
 			ctx.request.body = filter_request_body(ctx.request.body)
 			// console.log('ctx.request.body', ctx.request.body);
 
 		}
 
-		//先去执行路由
-		await next()
+		if(beforeApiEnter && beforeApiEnter(ctx, next) !== false) {
+			//先去执行路由
+			await next()
 
-		if(ctx.url.indexOf(`/${apiPrefix}`) === 0 && ctx.url.indexOf(`/${apiPrefix}/swagger`) < 0) {
-			if (ctx.body) {
-				ctx.body = {
-					success: true,
-					data: ctx.body
+			if(ctx.url.indexOf(`/${apiPrefix}`) === 0 && ctx.url.indexOf(`/${apiPrefix}/swagger`) < 0) {
+				if (ctx.body) {
+					ctx.body = {
+						success: true,
+						data: ctx.body
+					}
 				}
 			}
 		}
+
 
 		if(ctx.status === 404) {
 			ctx.body = {
