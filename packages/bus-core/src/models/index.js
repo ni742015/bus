@@ -46,7 +46,7 @@ class Models {
 				models[name] = mongoose.model(name.replace(/^\S/, s => s.toUpperCase()), Schema)
 			}
 
-			this.models = models
+			Object.assign(this.models, models)
 			return models
 		} catch (error) {
 			console.warn('Init Models Error', error)
