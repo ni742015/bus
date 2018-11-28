@@ -12,7 +12,7 @@ module.exports = {
 			return newData
 		}
 		if (body) {
-			return copyKeys(body, ['created_date', 'updated_date', 'creator_name', 'creator_id', '_id'])
+			return copyKeys(body, ['created_date', 'updated_date', 'creator_name', 'creator_id', 'last_modifier_name', 'last_modifier_id', '_id'])
 		}
 	},
 	compact(arg) {
