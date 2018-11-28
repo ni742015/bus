@@ -21,11 +21,11 @@ module.exports = async function(ctx, next) {
 
 					let token = ctx.request.header['authorization'].split(' ')[1] // Bearer xxx
 
-					// console.log('Token', Token)
+					console.log('Token', Token)
 					// 解码token
 					const decode = Token.decode({token})
 
-					// console.log('decode', decode)
+					console.log('decode', decode)
 
 					if(!decode) {
 						throw new ApiError(null, 401, 'Auth failed')
@@ -48,7 +48,7 @@ module.exports = async function(ctx, next) {
 
 		}
 
-		if(beforeApiEnter && beforeApiEnter(ctx, next) !== false) {
+		if(!beforeApiEnter || beforeApiEnter(ctx, next) !== false) {
 			//先去执行路由
 			await next()
 
