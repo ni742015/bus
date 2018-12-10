@@ -15,6 +15,7 @@
     "commands",
     "src",
     "webpack.config.js",
+    "babel.js",
     "api.js",
     "model.js",
     "schema.js"
