@@ -1,4 +1,4 @@
-import Api from "bus/api"
+import Api from "bus-core/api"
 import user from "./user"
 
 class _Api extends Api {

@@ -1,4 +1,4 @@
-import Bus from "bus";
+import Bus from "bus-core";
 import Api from "./apis";
 import Model from "./models";
 import Schema from "./schemas";
@@ -16,6 +16,7 @@ const bus = new Bus({
 })
 
 bus.start().then(app => {
+    console.info('app start', app);
     console.log('app', app);
     
 })

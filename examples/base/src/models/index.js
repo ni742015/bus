@@ -1,4 +1,4 @@
-import Model from "bus/model"
+import Model from "bus-core/model"
 import user from "./user"
 
 class _Model extends Model {

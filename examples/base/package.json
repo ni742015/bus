@@ -4,12 +4,14 @@
   "scripts": {
     "start": "node ./build/main.js",
     "dev": "bus dev",
-    "build": "bus build",
-    "postinstall": "bus build"
+    "build": "bus build"
   },
   "license": "MIT",
   "dependencies": {
-    "bus": "^0.1.10"
+    "bus-core": "^0.1.12"
   },
-  "gitHead": "25ad52a61094f6160327183a3af5f881650ff28a"
+  "gitHead": "25ad52a61094f6160327183a3af5f881650ff28a",
+  "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4"
+  }
 }

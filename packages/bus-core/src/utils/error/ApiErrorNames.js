@@ -9,6 +9,7 @@ ApiErrorNames.RESOURCES_EXIST = 'resourcesExist'
 ApiErrorNames.USER_NOT_PERMISSIONS = 'userNotPermissions'
 ApiErrorNames.RESOURCES_NOT_EXIST = 'resourcesNotExist'
 ApiErrorNames.SERVER_ERROR = 'serverError'
+ApiErrorNames.INVALID_CODE = 'invalidCode'
 
 /**
  * API错误名称对应的错误信息
@@ -21,6 +22,7 @@ error_map.set(ApiErrorNames.RESOURCES_EXIST, { status:400, message: 'Data alread
 error_map.set(ApiErrorNames.USER_NOT_PERMISSIONS, { status:401, message: 'User has no permissions' })
 error_map.set(ApiErrorNames.RESOURCES_NOT_EXIST, { status:404, message: 'There is no resources' })
 error_map.set(ApiErrorNames.SERVER_ERROR, { status:500, message: 'Internal Server Error' })
+error_map.set(ApiErrorNames.INVALID_CODE, { status:400, message: '验证码错误' })
 
 //根据错误名称获取错误信息
 ApiErrorNames.getErrorInfo = (error_name) => {

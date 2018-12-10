@@ -1,0 +1,4 @@
+{
+  "presets" : ["bus-core/babel"],
+	"plugins": [["transform-remove-console", { "exclude": [ "error", "warn", "info"] }]]
+}

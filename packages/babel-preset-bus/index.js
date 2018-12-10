@@ -1,4 +1,4 @@
-const path = require('path')
+// const path = require('path')
 
 const preset = {
   presets: [
@@ -61,4 +61,4 @@ if ((v[0] >= 7 && v[1] >= 6) || v[0] >= 8) {
   ]
 }
 
-module.exports = preset
+module.exports = () => preset
