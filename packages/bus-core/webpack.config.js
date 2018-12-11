@@ -14,7 +14,8 @@ const config = defaultConfig({
 		model: resolve('./src/models/index.js'),
 		schema: resolve('./src/schemas/index.js'),
 		'lib/error': resolve('./src/utils/error/apiError.js'),
-		'lib/token': resolve('./src/utils/token.js')
+		'lib/token': resolve('./src/utils/token.js'),
+		'lib/log': resolve('./src/utils/log.js')
 	},
 	output: {
 		path: resolve(''),

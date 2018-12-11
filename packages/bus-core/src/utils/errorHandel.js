@@ -1,9 +1,8 @@
-// const logUtil = require('./log')
+const logUtil = require('./log')
 
 module.exports = (error, ctx) => {
-	const start = new Date()
-	const ms = new Date() - start
+	const ms = new Date() - ctx.start_time
 	console.warn(`${ctx.method} ${ctx.url} - ${ms}ms`)
 	//记录异常日志
-	// logUtil.warn(ctx, error, ms)
+	logUtil.logError(ctx, error, ms)
 }

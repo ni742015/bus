@@ -6,12 +6,12 @@
 
 const { filter_request_body } = require('../utils/index.js')
 const ApiError = require('../utils/error/apiError')
-// const logUtil = require('../utils/log')
+const logUtil = require('../utils/log')
 
 module.exports = async function(ctx, next) {
 	try {
 		let {config: {apiPrefix}, hooks: {beforeApiEnter}} = this
-
+		ctx.start_time = new Date()
 		if(new RegExp(`^/${apiPrefix}`).test(ctx.url)) {
 			let Token = this.Token
 
@@ -79,7 +79,8 @@ module.exports = async function(ctx, next) {
 				message: error.message
 			}
 		}
-		// logUtil.warn(ctx, error)
+		throw error
+		// logUtil.logError(ctx, error, new Date() - ctx.start_time)
 		// }
 	}
 
