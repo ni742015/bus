@@ -1,6 +1,6 @@
 {
   "name": "bus-examples-base",
-  "version": "0.1.15-alpha.0",
+  "version": "0.1.15-alpha.1",
   "scripts": {
     "start": "node ./build/main.js",
     "dev": "bus dev",
@@ -8,7 +8,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bus-core": "^0.1.15-alpha.0"
+    "bus-core": "^0.1.15-alpha.1"
   },
   "gitHead": "e8f7518a237756b3b54b62ff699eec00e3097539",
   "devDependencies": {
