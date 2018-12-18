@@ -79,8 +79,7 @@ module.exports = async function(ctx, next) {
 				message: error.message
 			}
 		}
-		throw error
-		// logUtil.logError(ctx, error, new Date() - ctx.start_time)
+		logUtil.logError(ctx, error, new Date() - ctx.start_time)
 		// }
 	}
 

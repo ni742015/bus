@@ -3,12 +3,8 @@ const app = new Koa()
 const json = require('koa-json')
 const bodyparser = require('koa-bodyparser')
 const cors = require('koa2-cors')
-const onerror = require('koa-onerror')
 const errorHandel = require('./utils/errorHandel')
 const api_middleware = require('./middlewares/api')
-
-// 优化错误提示
-onerror(app)
 
 module.exports = function (router) {
 	let middlewares = [
