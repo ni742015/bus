@@ -69,7 +69,7 @@ module.exports = async function(ctx, next) {
 		}
 
 	} catch (error) {
-		console.warn('api_handel error', error)
+		// console.warn('api_handel error', error)
 		//如果异常类型是API异常并且通过正则验证的url，将错误信息添加到响应体中返回。
 		// if(error instanceof ApiError){
 		ctx.response.status = error.status || 500

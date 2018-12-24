@@ -105,6 +105,9 @@ var formatReqLog = function (req, resTime) {
 	//访问方法
 	logText += 'request method: ' + method + '\n'
 
+	//请求接口地址
+	logText += 'request originalUrl:  ' + req.originalUrl + '\n'
+
 	//请求原始地址
 	logText += 'request referer:  ' + req.header.referer + '\n'
 
