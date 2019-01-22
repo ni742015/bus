@@ -20,6 +20,7 @@ class Mongo {
 
 		db.on('error', (err) => {
 			console.log('数据库连接出错!', err)
+
 		})
 
 		db.on('open', () => {

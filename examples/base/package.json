@@ -10,7 +10,7 @@
   "dependencies": {
     "bus-core": "^0.1.15"
   },
-  "gitHead": "e8f7518a237756b3b54b62ff699eec00e3097539",
+  "gitHead": "305dcb48dedc9d605dd36b96e52e86e6fbe113e7",
   "devDependencies": {
     "babel-plugin-transform-remove-console": "^6.9.4"
   }
