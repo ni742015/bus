@@ -1,7 +1,15 @@
 {
   "private": true,
   "version": "0.0.1",
-  "description": "Bus is a system for Node.js",
+  "keywords": [
+    "koa2",
+    "webpack",
+    "swagger",
+    "babel",
+    "cil",
+    "es6"
+  ],
+  "description": "A cli tool for koa Development like vue cli",
   "author": "Yohann",
   "devDependencies": {
     "lerna": "^3.4.0"

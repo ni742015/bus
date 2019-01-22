@@ -18,11 +18,12 @@ module.exports = class Server {
 		this.Schema = Schema
 		this.Api = Api
 		this.hooks = hooks
-		// console.log('constructor', this.config)
+		// onInitSchema, onInitModels, onInitMiddlewares, onInitApi, beforeApiEnter
+
 	}
 
 	initMongo = async () => {
-		Mongo.init(this.config.mongodb)
+		Mongo.init(this.config.mongodb, this)
 		const {schemas, examples} = await this.Schema.init(this)
 		this.schemas = schemas
 		this.examples = examples

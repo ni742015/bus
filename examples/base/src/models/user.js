@@ -1,5 +1,5 @@
 
-module.exports = (schema) => {
+module.exports = (schema, models) => {
 	/**
 	 * Virtuals
 	 */

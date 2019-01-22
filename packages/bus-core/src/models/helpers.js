@@ -23,17 +23,5 @@ module.exports = {
 		func(str) {
 			return new RegExp(str.replace(/[*.?+$^[\](){}|/\\]/g, str => `\\${str}`), 'i')
 		}
-	},
-	getLastChar: {
-		type: 'statics',
-		func(col){
-			return { $cond:
-				{
-					if: { $gt: [{'$strLenCP': col}, 0] },
-					then: {$substr: [ col, { $subtract: [ {'$strLenCP': col}, 1 ] }, -1 ] },
-					else: ''
-				}
-			}
-		}
 	}
 }

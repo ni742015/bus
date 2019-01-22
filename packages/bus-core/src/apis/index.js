@@ -21,12 +21,12 @@ class Api {
 
 			decorator.wrapper(router)
 			// swagger docs avaliable at http://localhost:3001/api/swagger-html
-			router.swagger({
+			router.swagger(Object.assign({
 				title: 'Example Server',
 				description: 'API 文档',
 				version: '1.0.0',
 				// [optional] default is root path.
-				prefix: `/${config.apiPrefix}`,
+				prefix: `/${config.apiPrefix || 'api'}`,
 				// [optional] default is /swagger-html
 				swaggerHtmlEndpoint: '/swagger-html',
 				// [optional] default is /swagger-json
@@ -42,7 +42,7 @@ class Api {
 						}
 					},
 				}
-			})
+			}, config.swaggerConfig || {}))
 
 			// 过滤不用的参数
 			const decoratorBody = decorator.body
