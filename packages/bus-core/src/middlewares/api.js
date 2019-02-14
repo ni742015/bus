@@ -29,7 +29,7 @@ module.exports = async function(ctx, next) {
 					}
 
 					if(this.hooks.onTokenCheck) {
-						ctx.state = this.hooks.onTokenCheck(decode)
+						ctx.state = this.hooks.onTokenCheck(decode, ctx)
 					}
 
 					ctx.state = ctx.state || decode

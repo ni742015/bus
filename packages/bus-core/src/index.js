@@ -37,8 +37,12 @@ module.exports = class Server {
 		let {secret, excludeCheckUrl} = this.config
 		this.Token = new Token({secret, rules: excludeCheckUrl})
 
-		const ApiRouter = await this.Api.init(this)
-		this.router.use(`/${this.config.apiPrefix}`, ApiRouter.routes(), ApiRouter.allowedMethods())
+		if(this.Api) {
+			const ApiRouter = await this.Api.init(this)
+			this.router.use(`/${this.config.apiPrefix}`, ApiRouter.routes(), ApiRouter.allowedMethods())
+		} else {
+			console.warn('No Api Init')
+		}
 	}
 
 	initApp = async () => {

@@ -61,7 +61,7 @@ module.exports = options => {
 		// Bus's and the given user's node_modules without conflict.
 		resolve: {
 			extensions: [
-				'.js', '.json'
+				'.js'
 			],
 			alias: {
 				Root: process.cwd()
@@ -95,13 +95,13 @@ module.exports = options => {
 			rules: [
 				// This is the development configuration. It is focused on developer experience
 				// and fast rebuilds.
-				{
-					test: /\.json$/,
-					exclude: [
-						/node_modules/, config.buildPath
-					],
-					loader: require.resolve('json-loader')
-				},
+				// {
+				// 	test: /\.json$/,
+				// 	exclude: [
+				// 		/node_modules/, config.buildPath
+				// 	],
+				// 	loader: require.resolve('json-loader')
+				// },
 				// Process JS with Babel (transpiles ES6 code into ES5 code).
 				{
 					test: /\.(js|jsx)$/,
