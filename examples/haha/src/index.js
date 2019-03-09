@@ -5,15 +5,10 @@ import Schema from "./schemas";
 
 const bus = new Bus({
     config: {
-        port: 3000,
-        apiPrefix: 'api',
-        mongodb: {
-            url: 'mongodb://test:test@localhost:27017/test',
-            options: {
-                useNewUrlParser: true,
-                poolSize: 10
-            }
-        }
+        serect: 'bus',
+        excludeCheckUrl: [
+            {url: /user$/, methods: ['GET']}
+        ]
     },
     Api,
     Model,

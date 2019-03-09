@@ -4,6 +4,8 @@ function exampleForamt(data) {
 	for (const key in newData) {
 		if (newData.hasOwnProperty(key)) {
 			const item = newData[key]
+			// console.log(item);
+
 			// typeSwagger
 			item.type = item.typeSwagger || item.type.name.toLowerCase()
 		}
@@ -54,6 +56,7 @@ class Schema {
 					let formatedData = await hooks.onInitSchema(name, data)
 					data = formatedData ? formatedData : data
 				}
+				// console.log('schema name:', name)
 
 				schemas[name] = data
 				examples[name] = exampleForamt(data)

@@ -9,7 +9,7 @@
     "cil",
     "es6"
   ],
-  "description": "A cli tool for koa Development like vue cli",
+  "description": "A build system and frameworks for Node like Next.js",
   "author": "Yohann",
   "devDependencies": {
     "lerna": "^3.4.0"

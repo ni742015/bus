@@ -26,7 +26,7 @@ class Api {
 				description: 'API 文档',
 				version: '1.0.0',
 				// [optional] default is root path.
-				prefix: `/${config.apiPrefix || 'api'}`,
+				prefix: '/' + (config.apiPrefix === undefined ? config.apiPrefix : 'api'),
 				// [optional] default is /swagger-html
 				swaggerHtmlEndpoint: '/swagger-html',
 				// [optional] default is /swagger-json

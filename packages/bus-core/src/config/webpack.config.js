@@ -61,7 +61,8 @@ module.exports = options => {
 		// Bus's and the given user's node_modules without conflict.
 		resolve: {
 			extensions: [
-				'.js'
+				'.js',
+				// '.json'
 			],
 			alias: {
 				Root: process.cwd()

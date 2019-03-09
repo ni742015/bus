@@ -34,8 +34,11 @@ module.exports = class Server {
 	initRouter = async () => {
 		console.log('initRouter')
 
-		let {secret, excludeCheckUrl} = this.config
-		this.Token = new Token({secret, rules: excludeCheckUrl})
+		let {jwt} = this.config
+		if(jwt){
+			let {secret, excludeUrls} = jwt
+			this.Token = new Token({secret, rules: excludeUrls})
+		}
 
 		if(this.Api) {
 			const ApiRouter = await this.Api.init(this)

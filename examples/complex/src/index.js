@@ -13,6 +13,13 @@ const bus = new Bus({
                 useNewUrlParser: true,
                 poolSize: 10
             }
+        },
+        jwt: {
+            secert: 'bus',
+            excludeUrls: [
+                /\/test/,
+                {url: '/user', methods: ['GET']}
+            ]
         }
     },
     Api,
