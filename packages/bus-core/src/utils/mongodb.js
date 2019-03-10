@@ -8,7 +8,7 @@ const options = {
 
 class Mongo {
 	init(mgConfig, {hooks}) {
-		console.log('mongodb url', mgConfig.url)
+		console.log('Mongodb Url: ', mgConfig.url)
 		mongoose.connect(mgConfig.url, Object.assign(options, (mgConfig.options || {})))
 
 		const db = mongoose.connection
@@ -19,14 +19,14 @@ class Mongo {
 		hooks.onInitMongoose && hooks.onInitMongoose(mongoose)
 
 		db.on('error', (err) => {
-			console.log('数据库连接出错!', err)
+			console.error('mongoose connect error: ', err)
 		})
 
 		db.on('open', () => {
 			if(process.env.NODE_ENV === 'development') {
 				mongoose.set('debug', true)
 			}
-			console.log('数据库连接成功!')
+			console.log('Mongoose Connect Success!')
 		})
 	}
 }

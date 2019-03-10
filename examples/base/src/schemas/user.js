@@ -1,6 +1,6 @@
-const mongoose = require('mongoose')
+import mongoose from 'mongoose'
 
-module.exports = {
+export default {
 	username: {
 		type: String,
 		example: 'admin', // use for swagger
@@ -10,7 +10,12 @@ module.exports = {
     name: {
 		type: Object,
         first: String,
-        last: String
+		last: String,
+		example: {
+			first: 'haha',
+			last: 'hehe',
+		}, // use for swagger
+		
     },
 	role_id: {
 		type: mongoose.Types.ObjectId,

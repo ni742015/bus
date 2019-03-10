@@ -13,6 +13,9 @@ const bus = new Bus({
                 useNewUrlParser: true,
                 poolSize: 10
             }
+        },
+        swaggerConfig: {
+            title: 'Swagger Test'
         }
     },
     Api,

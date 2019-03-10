@@ -17,7 +17,7 @@ module.exports = {
 	},
 	compact(arg) {
 		let result
-		console.log('compact', Object.prototype.toString.call(arg))
+		// console.log('compact', Object.prototype.toString.call(arg))
 		if (Object.prototype.toString.call(arg) === '[object Object]') {
 			result = {}
 			for (const name in arg) {

@@ -1,7 +1,7 @@
-import Scheam from "bus-core/schema"
+import Schema from "bus-core/schema"
 import user from "./user"
 
-const scheam = new Scheam()
-scheam.add({name: 'user', scheam: user})
+const schema = new Schema()
+schema.add({name: 'user', schema: user})
 
-export default scheam
+export default schema

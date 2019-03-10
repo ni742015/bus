@@ -32,7 +32,7 @@ module.exports = class Server {
 	}
 
 	initRouter = async () => {
-		console.log('initRouter')
+		// console.log('initRouter')
 
 		let {jwt} = this.config
 		if(jwt){
@@ -52,15 +52,15 @@ module.exports = class Server {
 		await this.initMongo()
 		await this.initRouter()
 
-		console.log('initApp')
+		// console.log('initApp')
 		return App.call(this, this.router)
 	}
 
 	start = async () => {
-		console.log('start')
+		// console.log('start')
 		this.app = await this.initApp()
 
-		console.log('start server')
+		// console.log('start server')
 		return httpServer.call(this, this.app)
 	}
 }

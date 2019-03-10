@@ -17,7 +17,7 @@ class Api {
 
 	init = async ({ models, examples, hooks, config }) => {
 		try {
-			console.log('config.apiPrefix', config.apiPrefix)
+			// console.log('config.apiPrefix', config.apiPrefix)
 
 			decorator.wrapper(router)
 			// swagger docs avaliable at http://localhost:3001/api/swagger-html
@@ -50,6 +50,8 @@ class Api {
 				arguments[0] = utils.filter_request_body(arguments[0])
 				return decoratorBody.apply(this, arguments)
 			}
+
+			// console.log('this.datas', this.datas);
 
 			for (const {name: tagName, apiClass} of this.datas) {
 				const tag = decorator.tags([tagName])

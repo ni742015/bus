@@ -27,27 +27,28 @@ class Schema {
 	init = async ({hooks}) => {
 		try {
 			let schemas = {}, examples = {}
-			// console.log('this.datas', this.datas)
 
 			for (const {name, schema} of this.datas) {
 				let data = Object.assign({
-					creator_name: {
-						type: String,
-					},
-					creator_id: {
-						type: String,
-					},
-					last_modifier_name: {
-						type: String,
-					},
-					last_modifier_id: {
-						type: String,
-					},
+					// creator_name: {
+					// 	type: String,
+					// },
+					// creator_id: {
+					// 	type: String,
+					// },
+					// last_modifier_name: {
+					// 	type: String,
+					// },
+					// last_modifier_id: {
+					// 	type: String,
+					// },
 					created_date: {
 						type: Date,
+						typeSwagger: 'string',
 					},
 					updated_date: {
 						type: Date,
+						typeSwagger: 'string',
 					}
 				}, schema)
 
@@ -57,7 +58,6 @@ class Schema {
 					data = formatedData ? formatedData : data
 				}
 				// console.log('schema name:', name)
-
 				schemas[name] = data
 				examples[name] = exampleForamt(data)
 

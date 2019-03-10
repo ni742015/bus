@@ -4,11 +4,11 @@
 const http = require('http')
 
 module.exports = function (app) {
-	let {port} = this.config
+	let {port, apiPrefix} = this.config
 
 	// 将端口号设置为配置文件的端口号，默认值为3000
 	port = normalizePort(port || '3000')
-	console.log('port', port)
+	// console.log('port', port)
 
 	/**
  * Normalize a port into a number, string, or false.
@@ -35,7 +35,7 @@ module.exports = function (app) {
  */
 
 	function onError(error) {
-		console.log('onError', error)
+		console.error('Error:', error)
 
 		if (error.syscall !== 'listen') {
 			throw error
@@ -69,7 +69,8 @@ module.exports = function (app) {
 		var bind = typeof addr === 'string'
 			? 'pipe ' + addr
 			: 'port ' + addr.port
-		console.log('Listening on ' + bind)
+		console.info('Listening on ' + bind)
+		console.info(`Open http://localhost:${port}/${apiPrefix}/swagger-html to get swagger html`)
 	}
 
 	/**

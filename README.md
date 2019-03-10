@@ -2,7 +2,6 @@ Bus
 ============
 [![GitHub Stars](https://img.shields.io/github/stars/ni742015/bus.svg)](https://github.com/ni742015/bus/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/ni742015/bus.svg)](https://github.com/ni742015/bus/issues) [![Current Version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://github.com/ni742015/bus) 
 
-# bus
 > A build system and frameworks for Node like Next.js
 
 Bus is a one-stop solution for Node.js. Inspired by Vue-cil, Next.js and [Backpack](https://github.com/jaredpalmer/backpack)(if you only need a minimalistic build system you can choose it). Bus lets you set up a koa server by just running one command. You can use Babel, Webpack, Swagger, Mongoose in you project with less config. With WebpackBest of all, you can easily add Backpack to your existing Node.js project with just a single dependency.
@@ -54,10 +53,10 @@ and edit the config file:src/config/index.js like this:
     }
 }
 ```
-and then just run npm run dev and go to http://localhost:3000
+npm run dev and go to http://localhost:3000/api/swagger-html
 
 
-### Init Conifg
+### Init Config
 before start your project, check the options in the src/index.js
 ```
 import Bus from "bus-core";
@@ -87,6 +86,7 @@ const bus = new Bus({
 | [mongodb.options] | <code>Object</code> | [mongoose connent options](https://mongoosejs.com/docs/connections.html#options) |
 | [logsPath] | <code>String</code> | logs output paths(default: ./logs) |
 | [apiPrefix] | <code>String</code> | prefix add before every route |
+| [swaggerConfig] | <code>Object</code> | [swagger options](https://github.com/ni742015/bus/blob/master/packages/bus-core/src/apis/index.js) |
 | [port] | <code>String</code> | server port |
 | [jwt] | <code>Object</code> | jwt options |
 | [jwt.secert] | <code>String</code> | jwt secert(use to create a token) |
@@ -104,6 +104,9 @@ new Bus({
                 useNewUrlParser: true,
                 poolSize: 10
             }
+        },
+        swaggerConfig: {
+            title: 'Swagger Test'
         },
         jwt: {
             secert: 'bus',

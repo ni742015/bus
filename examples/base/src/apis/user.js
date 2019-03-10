@@ -1,4 +1,4 @@
-module.exports = ({
+export default ({
 	examples,
 	models,
 	tag,
@@ -19,7 +19,7 @@ module.exports = ({
 	const userExample = examples.user
 
 	class User {
-		@request('GET', '/users')
+		@request('GET', '/user')
 		@summary('获取用户信息')
 		@tag
 		@query({
@@ -28,15 +28,30 @@ module.exports = ({
 				description: 'username filter'
 			},
 		})
-		@responses([userExample])
+		@responses({
+			rows: 'object',
+			total: 'number'
+		})
 		// cover common api 
 		static async query(ctx) {
-			const {filter} = ctx.query
-			return userModel.like(filter, 'username') // this function is inherit from bus helper
-				.then(user => ctx.body = user)
-				.catch(err => {
-					throw new ApiError(null, 400, err.message)
-				})
+			try {
+				const {filter} = ctx.query
+				const find = {}
+				if(filter) {
+					find.name = userModel.regexp(filter)
+				}
+				const rows = await userModel
+					.find(find)
+					.paging(ctx.query) // this function is inherit from bus helper
+				const total = await userModel.countDocuments(find)
+					
+				ctx.body = {
+					rows,
+					total
+				}
+			} catch (error) {
+				throw new ApiError(null, 500, error.message)
+			}
 		}
 
 		@request('PUT', '/users/{_id}')
@@ -44,16 +59,15 @@ module.exports = ({
 		@tag
 		@path({
 			_id: {
-				type: 'ObjectId',
+				type: 'string',
 				required: true
 			}
 		})
 		@body(userExample)
-		@responses(userExample)
 		// cover common api 
 		static async put(ctx) {
 			const { params: {_id}, request: {body}} = ctx
-			return model.findByIdAndUpdate(_id, body, {new: true})
+			return userModel.findByIdAndUpdate(_id, body, {new: true})
 				.then(row => ctx.body = row)
 				.catch(err => {
 					throw new ApiError(ApiErrorNames.SERVER_ERROR)
