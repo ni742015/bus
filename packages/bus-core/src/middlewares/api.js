@@ -81,6 +81,8 @@ module.exports = async function(ctx, next) {
 				message: error.message
 			}
 		}
+
+		console.warn(`Error: ${ctx.method} ${ctx.url}\n`, error)
 		logUtil.logError(ctx, error, new Date() - ctx.start_time)
 		// }
 	}
