@@ -16,6 +16,13 @@ const bus = new Bus({
         },
         swaggerConfig: {
             title: 'Swagger Test'
+        },
+        jwt: {
+            secret: 'bus',
+            excludeUrls: [
+                /\/user\/login/,
+                {url: '/api/user/register', methods: ['POST']}
+            ]
         }
     },
     Api,
@@ -24,7 +31,7 @@ const bus = new Bus({
 })
 
 bus.start().then(app => {
-    console.info('app start', app);
-    console.log('app', app);
-    
+    console.info('app start success');
 })
+
+export default bus

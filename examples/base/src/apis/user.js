@@ -1,3 +1,5 @@
+import bus from '../index.js'
+
 export default ({
 	examples,
 	models,
@@ -19,6 +21,50 @@ export default ({
 	const userExample = examples.user
 
 	class User {
+		@request('POST', '/user/login')
+		@summary('login api')
+		@tag
+		@body({
+			username: {
+				type: 'string',
+				description: 'username'
+			},
+			password: {
+				type: 'string',
+				description: 'password'
+			},
+		})
+		static async login(ctx) {
+			const {username, password} = ctx.request.body
+			const user = await userModel.findOne({username, password})
+			
+			if(user) {
+				let data = {fullName: user.fullName}
+				let token = bus.Token.create(data, '30d')
+
+				ctx.body = {
+					user: data,
+					token
+				}
+			} else {
+				throw new ApiError(ApiErrorNames.RESOURCES_EXIST)
+
+			}
+		}
+
+		@request('POST', '/user/register')
+		@summary('register api')
+		@tag
+		@body(userExample)
+		@responses(userExample)
+		static async register(ctx) {
+			return userModel(ctx.request.body).save() // just for demo, never save user.password without encrypt
+				.then(user => ctx.body = user)
+				.catch(err => {
+					throw new ApiError(null, 500, err.message)
+				})
+		}
+
 		@request('GET', '/user')
 		@summary('获取用户信息')
 		@tag
@@ -54,25 +100,6 @@ export default ({
 			}
 		}
 
-		@request('PUT', '/users/{_id}')
-		@summary('获取用户信息')
-		@tag
-		@path({
-			_id: {
-				type: 'string',
-				required: true
-			}
-		})
-		@body(userExample)
-		// cover common api 
-		static async put(ctx) {
-			const { params: {_id}, request: {body}} = ctx
-			return userModel.findByIdAndUpdate(_id, body, {new: true})
-				.then(row => ctx.body = row)
-				.catch(err => {
-					throw new ApiError(ApiErrorNames.SERVER_ERROR)
-				})
-		}
 	}
 
 	return {

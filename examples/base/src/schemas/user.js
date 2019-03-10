@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
 
 export default {
 	username: {
@@ -7,20 +7,22 @@ export default {
 		unique: true,
 		required: true
 	},
+	password: {
+		type: String,
+	},
     name: {
 		type: Object,
         first: String,
 		last: String,
-		example: {
+		example: { // use for swagger
 			first: 'haha',
 			last: 'hehe',
-		}, // use for swagger
-		
+		},
     },
-	role_id: {
-		type: mongoose.Types.ObjectId,
-		typeSwagger: String, // use for swagger
-		example: 'role',
-        ref: 'Role'
-	},
+	// role_id: {
+	// 	type: mongoose.Types.ObjectId,
+	// 	typeSwagger: String, // use for swagger
+	// 	example: 'role',
+    //     ref: 'Role'
+	// },
 }

@@ -89,7 +89,7 @@ const bus = new Bus({
 | [swaggerConfig] | <code>Object</code> | [swagger options](https://github.com/ni742015/bus/blob/master/packages/bus-core/src/apis/index.js) |
 | [port] | <code>String</code> | server port |
 | [jwt] | <code>Object</code> | jwt options |
-| [jwt.secert] | <code>String</code> | jwt secert(use to create a token) |
+| [jwt.secret] | <code>String</code> | jwt secret(use to create a token) |
 | [jwt.excludeUrls] | <code>Array</code> | unauth routes |
 
 Example:
@@ -109,7 +109,7 @@ new Bus({
             title: 'Swagger Test'
         },
         jwt: {
-            secert: 'bus',
+            secret: 'bus',
             excludeUrls: [
                 /\/test/,
                 {url: '/user', methods: ['GET']}
@@ -335,7 +335,7 @@ Here's an example .babelrc file:
 Generate a template (only support base template now ...)
 You will see the build errors in the console that look like this.
 
-<img src="https://https://github.com/ni742015/bus/assets/command-init.png" width="600" alt="bus dev">
+<img src="https://github.com/ni742015/bus/blob/master/assets/command-init.png" width="600" alt="bus dev">
 
 
 ### `bus dev`
@@ -345,7 +345,7 @@ Runs bus in development mode.
 Your code will reload if you make edits.  
 You will see the build errors in the console that look like this.
 
-<img src="https://https://github.com/ni742015/bus/assets/command-error.png" width="600" alt="bus dev">
+<img src="https://github.com/ni742015/bus/blob/master/assets/command-error.png" width="600" alt="bus dev">
 
 ### `bus build`
 

@@ -18,11 +18,12 @@ module.exports = async function(ctx, next) {
 
 				// 排除一些路径
 				if(Token.checkUrl(ctx)) {
-					if (ctx.request.header['authorization']) {
-						let token = ctx.request.header['authorization'].split(' ')[1] // Bearer xxx
+					let {authorization} = ctx.request.header
+					if (authorization) {
+						let token = authorization.indexOf(' ') >= 0 ? authorization.split(' ').pop() : authorization // Bearer xxx
 
 						// 解码token
-						const decode = Token.decode({token})
+						const decode = Token.decode(token)
 						if(!decode) {
 							throw new ApiError(null, 401, 'Auth failed')
 						}

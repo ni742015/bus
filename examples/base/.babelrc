@@ -1,4 +1,10 @@
 {
   "presets" : ["bus-core/babel"],
-	"plugins": [["transform-remove-console", { "exclude": [ "error", "warn", "info"] }]]
+  "env": {
+    "production": {
+      "plugins": [
+        ["transform-remove-console", { "exclude": [ "error", "warn", "info"] }]
+      ]
+    }
+  }
 }

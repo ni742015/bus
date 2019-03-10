@@ -7,13 +7,13 @@ class Token {
 		this.secret = props.secret || ''
 	}
 
-	create = ({info, secret = this.secret, expiresIn}) => {
+	create = (info, expiresIn, secret = this.secret) => {
 		return jwt.sign(info, secret, {
 			expiresIn: expiresIn
 		})
 	}
 
-	decode = ({token, secret = this.secret}) => {
+	decode = (token, secret = this.secret) => {
 		if(token) {
 			let data = jwt.decode(token, secret)
 			if (data && data.exp > new Date()/1000) {
