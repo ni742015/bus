@@ -4,7 +4,8 @@ module.exports = ({
 	tag,
 	info: {
 		pathname,
-		name
+		name,
+		baseUrl
 	},
 	decorator: {
 		request,
@@ -19,7 +20,8 @@ module.exports = ({
 	// ApiError,
 	// ApiErrorNames
 }) => {
-	let lowcase_pathname = pathname.replace(/[A-Z]/, str => `_${str.toLowerCase()}`)
+	// let lowcase_pathname = pathname.replace(/[A-Z]/, str => `_${str.toLowerCase()}`)
+	let lowcase_pathname = baseUrl || pathname.replace(/[A-Z]/, str => str.toLowerCase())
 
 	function rename(target) {
 		if(target.name !== pathname) {

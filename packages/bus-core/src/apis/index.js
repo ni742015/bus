@@ -71,17 +71,17 @@ class Api {
 					await hooks.onInitApi(name, apiClass, args)
 				}
 
-				const {name, needCommonApi, ApiClass} = apiClass(args)
+				const {commonApiConfig, ApiClass} = apiClass(args)
 
 				// 增加继承默认接口
-				if(needCommonApi) {
+				if(commonApiConfig) {
 					CommonClass = commonClass({
 						model: models[tagName],
 						example: examples[tagName],
 						tag,
 						decorator,
 						info: {
-							name,
+							...commonApiConfig,
 							pathname: tagName
 						}
 					})

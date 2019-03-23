@@ -22,7 +22,7 @@ error_map.set(ApiErrorNames.RESOURCES_EXIST, { status:400, message: 'Data alread
 error_map.set(ApiErrorNames.USER_NOT_PERMISSIONS, { status:401, message: 'User has no permissions' })
 error_map.set(ApiErrorNames.RESOURCES_NOT_EXIST, { status:404, message: 'There is no resources' })
 error_map.set(ApiErrorNames.SERVER_ERROR, { status:500, message: 'Internal Server Error' })
-error_map.set(ApiErrorNames.INVALID_CODE, { status:400, message: '验证码错误' })
+error_map.set(ApiErrorNames.INVALID_CODE, { status:400, message: 'Invalid code' })
 
 //根据错误名称获取错误信息
 ApiErrorNames.getErrorInfo = (error_name) => {

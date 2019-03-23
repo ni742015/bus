@@ -2,11 +2,11 @@ Bus
 ============
 [![GitHub Stars](https://img.shields.io/github/stars/ni742015/bus.svg)](https://github.com/ni742015/bus/stargazers) [![GitHub Issues](https://img.shields.io/github/issues/ni742015/bus.svg)](https://github.com/ni742015/bus/issues) [![Current Version](https://img.shields.io/badge/version-0.2.0-green.svg)](https://github.com/ni742015/bus) 
 
-[中文文档](./README_zh-CN.md)
+[english](./README.md)
 
-> A build system and framework for Node like Next.js
+> 一个针对Node.js的脚手架构建工具，帮助快速搭建后端开发项目
 
-Bus is a one-stop solution for Node.js. Inspired by Vue-cil, Next.js, and [Backpack](https://github.com/jaredpalmer/backpack)]. Bus lets you set up a koa server by just running one command. You can use Babel, Webpack, Swagger, Mongoose in your project with less config.
+Bus是针对Node.js的一站式解决方案. 受到Vue-cil, Next.js, 和[Backpack](https://github.com/jaredpalmer/backpack)]的启发. Bus 让你可以通过一行命令快速启动一个基于koa的后端项目. 你可以在你的项目中使用Babel, Webpack, Swagger, Mongoose通过很少的一些配置.
 
 ---
 - [How to use](#how-to-use)
@@ -29,7 +29,7 @@ Bus is a one-stop solution for Node.js. Inspired by Vue-cil, Next.js, and [Backp
 ## How to use
 ### Setup
 
-Install it:
+安装方式:
 
 ```bash
 npm install -g bus-core
@@ -39,13 +39,13 @@ npx bus-core init
 
 ```
 
-Init project:
+初始化项目:
 ```bash
 cd yourproject
 npm install
 ```
 
-and edit the config file:src/config/index.js like this:
+修改配置文件 路径:src/config/index.js 参考以下配置:
 ```
 {
     port: 3000,
@@ -54,11 +54,11 @@ and edit the config file:src/config/index.js like this:
     }
 }
 ```
-npm run dev and go to http://localhost:3000/api/swagger-html
+运行 npm run dev 成功后打开 http://localhost:3000/api/swagger-html
 
 
 ### Init Config
-before start your project, check the options in the src/index.js
+在正式开发之前, 请先确认src/index.js中的设置
 ```
 import Bus from "bus-core";
 import Api from "./apis";
@@ -82,16 +82,16 @@ const bus = new Bus({
 
 | Param | Type | Description |
 | --- | --- | --- |
-| [mongodb] | <code>Object</code> | mongodb options |
+| [mongodb] | <code>Object</code> | mongodb设置项 |
 | [mongodb.url] | <code>String</code> | mongodb url |
-| [mongodb.options] | <code>Object</code> | [mongoose connent options](https://mongoosejs.com/docs/connections.html#options) |
-| [logsPath] | <code>String</code> | logs output paths(default: ./logs) |
-| [apiPrefix] | <code>String</code> | prefix add before every route |
-| [swaggerConfig] | <code>Object</code> | [swagger options](https://github.com/ni742015/bus/blob/master/packages/bus-core/src/apis/index.js) |
-| [port] | <code>String</code> | server port |
-| [jwt] | <code>Object</code> | jwt options |
-| [jwt.secret] | <code>String</code> | jwt secret(use to create a token) |
-| [jwt.excludeUrls] | <code>Array</code> | unauth routes |
+| [mongodb.options] | <code>Object</code> | [mongoose链接设置](https://mongoosejs.com/docs/connections.html#options) |
+| [logsPath] | <code>String</code> | logs输出地址(default: ./logs) |
+| [apiPrefix] | <code>String</code> | 每个路由的前缀 |
+| [swaggerConfig] | <code>Object</code> | [swagger设置](https://github.com/ni742015/bus/blob/master/packages/bus-core/src/apis/index.js) |
+| [port] | <code>String</code> | 程序端口 |
+| [jwt] | <code>Object</code> | jwt 设置 |
+| [jwt.secret] | <code>String</code> | jwt 秘钥(用于加密生成一个token) |
+| [jwt.excludeUrls] | <code>Array</code> | 不需要授权的路由 |
 
 Example:
 ```
@@ -122,9 +122,9 @@ new Bus({
 
 #### Schema
 
-The schema is used for either swagger's responses and mongoose's schema
+schema 同时用于生成mongoose的映射model和swagger中的返回示例对象
 
-defind a schmea
+定义一个schmea
 ```
 // user.js
 const mongoose = require('mongoose')
@@ -147,9 +147,9 @@ module.exports = {
 
 #### Model
 
-Model for mongoose([check here](https://mongoosejs.com/docs/guide.html#models))
+mongoose的model([详情](https://mongoosejs.com/docs/guide.html#models))
 
-> tips: each model will be added three default methods([check here](https://github.com/ni742015/bus/blob/master/packages/bus-core/src/models/helpers.js))
+> 提示: 每个model都会有3个默认方法([详情](https://github.com/ni742015/bus/blob/master/packages/bus-core/src/models/helpers.js))
 
 ```
 // user.js
@@ -164,23 +164,23 @@ module.exports = (schema, models) => {
 ```
 
 #### Api
-To combine swagger with api, we use using decorator to make api definition([koa-swagger-decorator](https://github.com/Cody2333/koa-swagger-decorator))
+我们使用decorator的写法来结合swagger和api，参考([koa-swagger-decorator](https://github.com/Cody2333/koa-swagger-decorator))
 
 beneath params will be given to your module
 | Param | Type | Description |
 | --- | --- | --- |
-| [examples] | <code>Object</code> | swagger examples can be used in body or responses |
-| [models] | <code>Object</code> | mongoose model |
+| [examples] | <code>Object</code> | 根据scheam生成的swagger example |
+| [models] | <code>Object</code> | mongoose model对象 |
 | [tag] | <code>Object</code> | swagger decorator tag |
 | [decorator] | <code>Object</code> | swagger decorator |
-| [ApiError] | <code>Object</code> | [error object](#apierrors) |
-| [ApiErrorNames] | <code>String</code> | [error names](#apierrors)  |
+| [ApiError] | <code>Object</code> | [error 对象](#apierrors) |
+| [ApiErrorNames] | <code>String</code> | [error 名称](#apierrors)  |
 
 return example
 | Param | Type | require | Description |
 | --- | --- | --- | --- |
-| [commonApiConfig] | <code>Object</code> | false | config for commonapi e.g. {baseUrl, name} |
-| [ApiClass] | <code>Object</code> | true | your api class |
+| [commonApiConfig] | <code>Object</code> | false | 通用接口继承设置，例 {baseUrl, name} |
+| [ApiClass] | <code>Object</code> | true | 你的接口类 |
 
 
 ```
@@ -237,33 +237,33 @@ module.exports = ({
 ```
 
 #### hooks
- -- The Document order is the same as the execution order --
+ -- 文档中的顺序和实际执行顺序相同 --
 * onInitMongoose
     ```
-    // will be call after mongoose.connect
+    // 在mongoose.connect之后调用
     onInitMongoose(mongoose)
     ```
 * onInitSchema
     ```
-    // will be call when fromat scheam and example, you can add unify attributes for both of them here
+    // 在格式化scheam和example的时候调用, 你可以在这里给他们一起添加属性
     await hooks.onInitSchema(name, data) // promise
     // return fromatedData
     ```
 * onInitModels
     ```
-    // will be call before use mongoose.model(name, Schema)
+    // 在用schema生成model前调用
     await hooks.onInitModels(name, Schema) // promise
     // return fromatedSchema
     ```
 * onInitApi
     ```
-    // will be call before add to router, you can add unify methods for each apiClass.
-    // args is the same as the one pass to apiClass
+    // 在api注册到router前调用, 你可以在这里给每个apiClass增加通用方法.
+    // args和传递给apiClass的参数相同
     await hooks.onInitApi(name, apiClass, args) // promise
     ```
 * onInitMiddlewares
     ```
-    // will be call when init middlewares, you can add your middlewares by modifty the middlewares argument.
+    // 在初始化中间件的时候调用。你可以通过修改middlewares参数来添加你自己的中间件
     this.hooks.onInitMiddlewares(middlewares, app)
 
     // e.g.
@@ -273,17 +273,17 @@ module.exports = ({
     ```
 * onTokenCheck
     ```
-    // will be call before request pass to api(exclude jwt.excludeUrls)
+    // 在需要授权的请求进入对应api前被调用(除了 jwt.excludeUrls 中排除的)
     await this.hooks.onTokenCheck(decode, ctx) // promise, the decode jwt data will be the first argument
     ```
 * beforeApiEnter
     ```
-    // will be call before request pass to api(for all apis)
+    // 在请求进入对应api前被调用(对所有api都适用)
     await beforeApiEnter(ctx, next) // promise
     ```
 * beforeApiResolve
     ```
-    // will be call before request resloved(for all apis), you can format the result here
+    // 在每个接口请求完成前调用(对所有api都适用), 你可以在这里统一处理返回格式
     ctx.body = (beforeApiResolve && await beforeApiResolve(ctx)) || { // promise
         success: true,
         data: ctx.body
@@ -291,7 +291,8 @@ module.exports = ({
     ```
 
 #### ApiErrors
-enumeration
+默认提供一下几种错误格式
+
 * ApiErrorNames.PARAMS_ERROR,  status:400, message: 'Request parameter is wrong' 
 * ApiErrorNames.RESOURCES_EXIST,  status:400, message: 'Data already exists'
 * ApiErrorNames.USER_NOT_PERMISSIONS,  status:401, message: 'User has no permissions'
@@ -305,10 +306,10 @@ new ApiError(ApiErrorNames.PARAMS_ERROR)
 ```
 
 ## Custom configuration
-For custom advanced behavior, you can create a bus.config.js in the root of your project's directory (next to package.json).
+你可以创建一个在项目根目录创建一个bus.config.js文件，来做更多的设置.
 
 ### Customizing webpack config
-To extend webpack, you can define a function that extends its config in bus.config.js.
+你可以通过在backpack.config.js中定义一个webpack方法来拓展webpack的设置
 
 ```
 // bus.config.js
@@ -326,13 +327,9 @@ module.exports = {
 ```
 
 ### Customizing babel config
-To extend our usage of babel, you can define a .babelrc file at the root of your app. This file is optional.
+你可以创建一个在项目根目录创建一个.babelrc文件来拓展babel的设置.
 
-If found, Backpack will consider it to be the source of truth. Thus it must define what Bus needs as well, which is the bus-core/babel preset.
-
-This is designed so that you are not surprised by modifications we could make to the default babel configurations.
-
-Here's an example .babelrc file:
+参考以下示例:
 ```
 {
   "presets" : ["bus-core/babel"],
@@ -349,34 +346,31 @@ Here's an example .babelrc file:
 ## CLI Commands
 
 ### `bus init`
-Generate a template (only support base template now ...)
+生成一个项目 (现在只提供base模板)
 
 <img src="https://github.com/ni742015/bus/blob/master/assets/command-init.png" width="600" alt="bus dev">
 
 
 ### `bus dev`
 
-Runs bus in development mode.
+开发环境运行.
 
-Your code will reload if you make edits.  
-You will see the build errors in the console that look like this.
+当你修改代码时会自动重载，代码错误会如下显示.  
 
 <img src="https://github.com/ni742015/bus/blob/master/assets/command-error.png" width="600" alt="bus dev">
 
 ### `bus build`
 
-Builds the app for production to the `build` folder.  
-It correctly bundles your production mode and optimizes the build for the best performance.
+将以生产模式优化构建以获得最佳性能，构建后的代码将输出在 build 目录下.
 
-You can run your production application with the following command:
+你可以通过以下命令运行构建后的代码:
 
 ```bash
 node ./build/main.js
 ```
 
-Your application is ready to be deployed!
+你的应用已经可以发布了!
 
-_Note: Make sure to add the `build` directory to your `.gitignore` to keep compiled code out of your git repository_
 
 ## Inspiration
 

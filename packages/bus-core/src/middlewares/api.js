@@ -10,7 +10,7 @@ const logUtil = require('../utils/log')
 
 module.exports = async function(ctx, next) {
 	try {
-		let {config: {jwt, apiPrefix}, hooks: {beforeApiEnter}} = this
+		let {config: {jwt, apiPrefix}, hooks: {beforeApiEnter, beforeApiResolve}} = this
 		ctx.start_time = new Date()
 		if(jwt) {
 			if(new RegExp(`^/${apiPrefix}`).test(ctx.url)) {
@@ -53,7 +53,7 @@ module.exports = async function(ctx, next) {
 
 			if(ctx.url.indexOf(`/${apiPrefix}`) === 0 && ctx.url.indexOf(`/${apiPrefix}/swagger`) < 0) {
 				if (ctx.body) {
-					ctx.body = {
+					ctx.body = (beforeApiResolve && await beforeApiResolve(ctx)) || {
 						success: true,
 						data: ctx.body
 					}

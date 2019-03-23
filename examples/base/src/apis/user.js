@@ -103,8 +103,9 @@ export default ({
 	}
 
 	return {
-		name: 'user',
-		needCommonApi: true, // inherit common api
+		commonApiConfig: { // inherit common api
+			name: '用户',
+		},
 		ApiClass: User
 	}
 }
