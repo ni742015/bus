@@ -8,9 +8,9 @@ export default ({
 		request,
 		summary,
 		body,
-		middlewares,
-		path,
-		description,
+		// middlewares,
+		// path,
+		// description,
 		query,
 		responses
 	},
@@ -37,7 +37,7 @@ export default ({
 		static async login(ctx) {
 			const {username, password} = ctx.request.body
 			const user = await userModel.findOne({username, password})
-			
+
 			if(user) {
 				let data = {fullName: user.fullName}
 				let token = bus.Token.create(data, '30d')
@@ -78,7 +78,7 @@ export default ({
 			rows: 'object',
 			total: 'number'
 		})
-		// cover common api 
+		// cover common api
 		static async query(ctx) {
 			try {
 				const {filter} = ctx.query
@@ -90,7 +90,7 @@ export default ({
 					.find(find)
 					.paging(ctx.query) // this function is inherit from bus helper
 				const total = await userModel.countDocuments(find)
-					
+
 				ctx.body = {
 					rows,
 					total

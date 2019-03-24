@@ -6,16 +6,18 @@ Bus
 
 > 一个针对Node.js的脚手架构建工具，帮助快速搭建后端开发项目
 
-Bus是针对Node.js的一站式解决方案. 受到Vue-cil, Next.js, 和[Backpack](https://github.com/jaredpalmer/backpack)]的启发. Bus 让你可以通过一行命令快速启动一个基于koa的后端项目. 你可以在你的项目中使用Babel, Webpack, Swagger, Mongoose通过很少的一些配置.
+Bus是针对Node.js的一站式解决方案. 受到Vue-cil, Next.js, 和[Backpack](https://github.com/jaredpalmer/backpack)的启发. Bus 让你可以通过一行命令快速启动一个基于koa的后端项目. 你可以在你的项目中使用Babel, Webpack, Swagger, Mongoose通过很少的一些配置.
 
 ---
 - [How to use](#how-to-use)
   - [Setup](#setup)
   - [Init Conifg](#init-config)
     - [Config](#config)
+        - [Jwt](#jwt)
     - [Scheam](#scheam)
     - [Model](#model)
     - [Api](#api)
+        - [commonApiConfig](#commonApiConfig)
     - [hooks](#hooks)
     - [ApiErrors](#apierrors)
 - [Custom configuration](#custom-configuration)
@@ -118,6 +120,46 @@ new Bus({
         }
     }
 })
+```
+
+##### jwt
+如果你在config中做了jwt相关的设置，你可以通过引用bus的实例来创建一个token
+Example:
+```
+import bus from '../index.js'
+
+class User {
+    @request('POST', '/user/login')
+    @summary('login api')
+    @tag
+    @body({
+        username: {
+            type: 'string',
+            description: 'username'
+        },
+        password: {
+            type: 'string',
+            description: 'password'
+        },
+    })
+    static async login(ctx) {
+        const {username, password} = ctx.request.body
+        const user = await userModel.findOne({username, password})
+        
+        if(user) {
+            let data = {fullName: user.fullName}
+            let token = bus.Token.create(data, '30d')
+
+            ctx.body = {
+                user: data,
+                token
+            }
+        } else {
+            throw new ApiError(ApiErrorNames.RESOURCES_EXIST)
+
+        }
+    }
+}
 ```
 
 #### Schema
@@ -236,6 +278,16 @@ module.exports = ({
 }
 ```
 
+##### commonApiConfig
+如果你想继承通用的api，你需要知道以下几点
+
+1. 覆盖common api
+你可以通过定义同名方法的方式来覆盖common api，例如get, post, query, put, delete, deleteBatch
+
+2. 修改url路径
+默认的url是{prefix}/{filename}的形式, 如果你设置了baseUrl它会变成这样{prefix}/{baseUrl}/{filename}
+
+
 #### hooks
  -- 文档中的顺序和实际执行顺序相同 --
 * onInitMongoose
@@ -309,7 +361,7 @@ new ApiError(ApiErrorNames.PARAMS_ERROR)
 你可以创建一个在项目根目录创建一个bus.config.js文件，来做更多的设置.
 
 ### Customizing webpack config
-你可以通过在backpack.config.js中定义一个webpack方法来拓展webpack的设置
+你可以通过在bus.config.js中定义一个webpack方法来拓展webpack的设置
 
 ```
 // bus.config.js
@@ -374,6 +426,9 @@ node ./build/main.js
 
 ## Inspiration
 
-* [jaredpalmer/backpack](https://github.com/jaredpalmer/backpack)](if you only need a minimalistic it's a better choice.)
+* [jaredpalmer/backpack](https://github.com/jaredpalmer/backpack)(if you only need a minimalistic it's a better choice.)
 * [zeit/next.js](https://github.com/zeit/next.js)
 * [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+
+## Authors
+* Yohann (421225824@qq.com)

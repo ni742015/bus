@@ -1,7 +1,15 @@
-import Schema from "bus-core/schema"
-import user from "./user"
-
+import Schema from 'bus-core/schema'
+import glob from 'glob'
+const path = require('path')
 const schema = new Schema()
-schema.add({name: 'user', schema: user})
+
+const paths = glob.sync(path.resolve(__dirname, './!(index.js)'))
+
+for (const path of paths) {
+	const name = path.split('/').pop().replace('.js', '')
+	const _schema = require(`./${name}`).default
+
+	schema.add({name, schema: _schema})
+}
 
 export default schema

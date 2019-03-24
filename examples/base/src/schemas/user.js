@@ -10,19 +10,19 @@ export default {
 	password: {
 		type: String,
 	},
-    name: {
+	name: {
 		type: Object,
-        first: String,
+		first: String,
 		last: String,
 		example: { // use for swagger
 			first: 'haha',
 			last: 'hehe',
 		},
-    },
+	},
 	// role_id: {
 	// 	type: mongoose.Types.ObjectId,
 	// 	typeSwagger: String, // use for swagger
 	// 	example: 'role',
-    //     ref: 'Role'
+	//     ref: 'Role'
 	// },
 }

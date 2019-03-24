@@ -6,16 +6,18 @@ Bus
 
 > A build system and framework for Node like Next.js
 
-Bus is a one-stop solution for Node.js. Inspired by Vue-cil, Next.js, and [Backpack](https://github.com/jaredpalmer/backpack)]. Bus lets you set up a koa server by just running one command. You can use Babel, Webpack, Swagger, Mongoose in your project with less config.
+Bus is a one-stop solution for Node.js. Inspired by Vue-cil, Next.js, and [Backpack](https://github.com/jaredpalmer/backpack). Bus lets you set up a koa server by just running one command. You can use Babel, Webpack, Swagger, Mongoose in your project with less config.
 
 ---
 - [How to use](#how-to-use)
   - [Setup](#setup)
   - [Init Conifg](#init-config)
     - [Config](#config)
+        - [Jwt](#jwt)
     - [Scheam](#scheam)
     - [Model](#model)
     - [Api](#api)
+        - [commonApiConfig](#commonApiConfig)
     - [hooks](#hooks)
     - [ApiErrors](#apierrors)
 - [Custom configuration](#custom-configuration)
@@ -119,6 +121,49 @@ new Bus({
     }
 })
 ```
+
+##### jwt
+if you have set jwt option in your config, you can import the bus instance to create a token
+Example:
+```
+import bus from '../index.js'
+
+class User {
+    @request('POST', '/user/login')
+    @summary('login api')
+    @tag
+    @body({
+        username: {
+            type: 'string',
+            description: 'username'
+        },
+        password: {
+            type: 'string',
+            description: 'password'
+        },
+    })
+    static async login(ctx) {
+        const {username, password} = ctx.request.body
+        const user = await userModel.findOne({username, password})
+        
+        if(user) {
+            let data = {fullName: user.fullName}
+            let token = bus.Token.create(data, '30d')
+
+            ctx.body = {
+                user: data,
+                token
+            }
+        } else {
+            throw new ApiError(ApiErrorNames.RESOURCES_EXIST)
+
+        }
+    }
+}
+```
+
+
+
 
 #### Schema
 
@@ -236,6 +281,15 @@ module.exports = ({
 }
 ```
 
+##### commonApiConfig
+if you want to extend your apiClass with commonApi, here's what you need to know
+
+1. cover the common api
+you can cover the common api by define the same function name, such as get, post, query, put, delete, deleteBatch
+
+2. change the url
+{prefix}/{filename} is the default api url, if you set the baseUrl, it will be change to this {prefix}/{baseUrl}/{filename}
+
 #### hooks
  -- The Document order is the same as the execution order --
 * onInitMongoose
@@ -328,7 +382,7 @@ module.exports = {
 ### Customizing babel config
 To extend our usage of babel, you can define a .babelrc file at the root of your app. This file is optional.
 
-If found, Backpack will consider it to be the source of truth. Thus it must define what Bus needs as well, which is the bus-core/babel preset.
+If found, Bus will consider it to be the source of truth. Thus it must define what Bus needs as well, which is the bus-core/babel preset.
 
 This is designed so that you are not surprised by modifications we could make to the default babel configurations.
 
@@ -380,6 +434,9 @@ _Note: Make sure to add the `build` directory to your `.gitignore` to keep compi
 
 ## Inspiration
 
-* [jaredpalmer/backpack](https://github.com/jaredpalmer/backpack)](if you only need a minimalistic it's a better choice.)
+* [jaredpalmer/backpack](https://github.com/jaredpalmer/backpack)(if you only need a minimalistic it's a better choice.)
 * [zeit/next.js](https://github.com/zeit/next.js)
 * [vuejs/vue-cli](https://github.com/vuejs/vue-cli)
+
+## Authors
+* Yohann (421225824@qq.com)
