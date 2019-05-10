@@ -212,6 +212,7 @@ module.exports = (schema, models) => {
 To combine swagger with api, we use using decorator to make api definition([koa-swagger-decorator](https://github.com/Cody2333/koa-swagger-decorator))
 
 beneath params will be given to your module
+
 | Param | Type | Description |
 | --- | --- | --- |
 | [examples] | <code>Object</code> | swagger examples can be used in body or responses |
@@ -222,6 +223,7 @@ beneath params will be given to your module
 | [ApiErrorNames] | <code>String</code> | [error names](#apierrors)  |
 
 return example
+
 | Param | Type | require | Description |
 | --- | --- | --- | --- |
 | [commonApiConfig] | <code>Object</code> | false | config for commonapi e.g. {baseUrl, name} |
