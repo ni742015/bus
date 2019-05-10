@@ -209,6 +209,7 @@ module.exports = (schema, models) => {
 我们使用decorator的写法来结合swagger和api，参考([koa-swagger-decorator](https://github.com/Cody2333/koa-swagger-decorator))
 
 beneath params will be given to your module
+
 | Param | Type | Description |
 | --- | --- | --- |
 | [examples] | <code>Object</code> | 根据scheam生成的swagger example |
@@ -219,6 +220,7 @@ beneath params will be given to your module
 | [ApiErrorNames] | <code>String</code> | [error 名称](#apierrors)  |
 
 return example
+
 | Param | Type | require | Description |
 | --- | --- | --- | --- |
 | [commonApiConfig] | <code>Object</code> | false | 通用接口继承设置，例 {baseUrl, name} |
