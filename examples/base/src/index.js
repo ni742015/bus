@@ -23,6 +23,16 @@ const bus = new Bus({
 				/\/user\/login/,
 				{url: '/api/user/register', methods: ['POST']}
 			]
+		},
+		middlewares(chain) {
+			chain.before('_api', {name: 'test', middleware: () => (ctx, next) => {
+				console.log(`${ctx.method} ${ctx.url}`)
+				next()
+			}})
+
+			chain.setOpt('_cors', {credentials: true})
+			console.log(chain.value())
+
 		}
 	},
 	Api,

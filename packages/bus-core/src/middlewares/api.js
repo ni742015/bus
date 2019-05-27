@@ -12,6 +12,7 @@ module.exports = async function(ctx, next) {
 	try {
 		let {config: {jwt, apiPrefix}, hooks: {beforeApiEnter, beforeApiResolve}} = this
 		ctx.start_time = new Date()
+
 		if(jwt) {
 			if(new RegExp(`^/${apiPrefix}`).test(ctx.url)) {
 				let Token = this.Token
