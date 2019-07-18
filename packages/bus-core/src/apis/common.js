@@ -123,7 +123,7 @@ module.exports = ({
 		@responses(example)
 		static async put(ctx) {
 			const { params: {_id}, request: {body}} = ctx
-			console.log('_id', _id);
+			// console.log('_id', _id);
 
 			return model.findByIdAndUpdate(_id, body, {new: true}).then(row => ctx.body = row)
 		}

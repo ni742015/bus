@@ -29,11 +29,12 @@ module.exports = async function(ctx, next) {
 							throw new ApiError(null, 401, 'Auth failed')
 						}
 
+						ctx.state = undefined
 						if(this.hooks.onTokenCheck) {
 							ctx.state = await this.hooks.onTokenCheck(decode, ctx)
 						}
 
-						ctx.state = ctx.state || decode
+						ctx.state = ctx.state || decode || {}
 
 					} else {
 						throw new ApiError(null, 401, 'There is no token')
@@ -52,12 +53,18 @@ module.exports = async function(ctx, next) {
 			//先去执行路由
 			await next()
 
-			if(ctx.url.indexOf(`/${apiPrefix}`) === 0 && ctx.url.indexOf(`/${apiPrefix}/swagger`) < 0) {
-				if (ctx.body) {
-					ctx.body = (beforeApiResolve && await beforeApiResolve(ctx)) || {
-						success: true,
-						data: ctx.body
-					}
+			if(ctx.url.indexOf(`/${apiPrefix}`) === 0 && ctx.url.indexOf('/swagger') < 0) {
+				let body = {
+					success: true,
+					data: ctx.body
+				}
+
+				if(beforeApiResolve) {
+					body = await beforeApiResolve(ctx)
+				}
+
+				if (body) {
+					ctx.body = body
 				}
 			}
 		}
@@ -76,12 +83,16 @@ module.exports = async function(ctx, next) {
 		//如果异常类型是API异常并且通过正则验证的url，将错误信息添加到响应体中返回。
 		// if(error instanceof ApiError){
 		ctx.response.status = error.status || 500
-		ctx.body = {
+		if(this.hooks.onApiError) {
+			this.hooks.onApiError(ctx, error)
+		}
+
+		!ctx.body && (ctx.body = {
 			success: false,
 			data: {
 				message: error.message
 			}
-		}
+		})
 
 		console.warn(`Error: ${ctx.method} ${ctx.url}\n`, error)
 		logUtil.logError(ctx, error, new Date() - ctx.start_time)

@@ -1,5 +1,5 @@
 module.exports = {
-	filter_request_body(body) {
+	filter_request_body(body, keys = []) {
 		const newData = {}
 		function copyKeys(obj, excludes) {
 			for (const key in obj) {
@@ -12,7 +12,7 @@ module.exports = {
 			return newData
 		}
 		if (body) {
-			return copyKeys(body, ['created_date', 'updated_date', 'creator_name', 'creator_id', 'last_modifier_name', 'last_modifier_id', '_id'])
+			return copyKeys(body, keys)
 		}
 	},
 	compact(arg) {

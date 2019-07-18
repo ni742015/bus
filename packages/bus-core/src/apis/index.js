@@ -1,5 +1,7 @@
 const router = require('koa-router')()
 const decorator = require('koa-swagger-decorator')
+const mongoose = require('mongoose')
+
 const utils = require('../utils/index.js')
 const commonClass = require('./common.js')
 const ApiError = require('../utils/error/apiError')
@@ -18,6 +20,8 @@ class Api {
 	init = async ({ models, examples, hooks, config }) => {
 		try {
 			// console.log('config.apiPrefix', config.apiPrefix)
+			let {apiPrefix, bodyExcludeKeys} = config
+			apiPrefix = apiPrefix ? `/${apiPrefix}` : ''
 
 			decorator.wrapper(router)
 			// swagger docs avaliable at http://localhost:3001/api/swagger-html
@@ -26,11 +30,11 @@ class Api {
 				description: 'API 文档',
 				version: '1.0.0',
 				// [optional] default is root path.
-				prefix: '/' + (config.apiPrefix === undefined ? config.apiPrefix : 'api'),
+				prefix: `${apiPrefix}`,
 				// [optional] default is /swagger-html
-				swaggerHtmlEndpoint: '/swagger-html',
+				swaggerHtmlEndpoint: `/swagger-html`,
 				// [optional] default is /swagger-json
-				swaggerJsonEndpoint: '/swagger-json',
+				swaggerJsonEndpoint: `/swagger-json`,
 				// [optional] additional options for building swagger doc
 				// eg. add api_key as shown below
 				swaggerOptions: {
@@ -47,7 +51,7 @@ class Api {
 			// 过滤不用的参数
 			const decoratorBody = decorator.body
 			decorator.body = function () {
-				arguments[0] = utils.filter_request_body(arguments[0])
+				arguments[0] = utils.filter_request_body(arguments[0], bodyExcludeKeys)
 				return decoratorBody.apply(this, arguments)
 			}
 
@@ -64,11 +68,12 @@ class Api {
 					tag,
 					decorator,
 					ApiError,
-					ApiErrorNames
+					ApiErrorNames,
+					mongoose
 				}
 
 				if(hooks.onInitApi) {
-					await hooks.onInitApi(name, apiClass, args)
+					await hooks.onInitApi(tagName, apiClass, args)
 				}
 
 				const {commonApiConfig, ApiClass} = apiClass(args)
@@ -80,6 +85,7 @@ class Api {
 						example: examples[tagName],
 						tag,
 						decorator,
+						mongoose,
 						info: {
 							...commonApiConfig,
 							pathname: tagName

@@ -1,6 +1,4 @@
-// import mongoose from 'mongoose'
-
-export default {
+export default (mongoose) => ({
 	username: {
 		type: String,
 		example: 'admin', // use for swagger
@@ -19,10 +17,10 @@ export default {
 			last: 'hehe',
 		},
 	},
-	// role_id: {
-	// 	type: mongoose.Types.ObjectId,
-	// 	typeSwagger: String, // use for swagger
-	// 	example: 'role',
-	//     ref: 'Role'
-	// },
-}
+	role_id: {
+		type: mongoose.Types.ObjectId,
+		typeSwagger: String, // use for swagger
+		example: 'role',
+	    ref: 'Role'
+	}
+})

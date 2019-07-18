@@ -1,6 +1,5 @@
 const Koa = require('koa')
 const app = new Koa()
-const json = require('koa-json')
 const bodyparser = require('koa-bodyparser')
 const cors = require('koa2-cors')
 const MwChain = require('./utils/mwChain')
@@ -12,7 +11,7 @@ module.exports = function (router) {
 	let {config} = this
 	let middlewares = []
 	let mwChain = new MwChain([
-		{name:'_cors', opt: {}, middleware: cors},
+		{name:'_cors', opt: config.cors || {}, middleware: cors},
 		{name:'_bodyparser', opt: {enableTypes:['json', 'form']}, middleware: bodyparser},
 		{name:'_timer', opt: {}, middleware: () => async (ctx, next) => {
 			const start = new Date()

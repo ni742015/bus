@@ -1,3 +1,5 @@
+const mongoose = require('mongoose')
+
 function exampleForamt(data) {
 	const newData = Object.assign({}, data)
 	// const newData = _.cloneDeep(data)
@@ -5,9 +7,12 @@ function exampleForamt(data) {
 		if (newData.hasOwnProperty(key)) {
 			const item = newData[key]
 			// console.log(item);
-
-			// typeSwagger
-			item.type = item.typeSwagger || item.type.name.toLowerCase()
+			if (item.type) {
+				// typeSwagger
+				item.type = item.typeSwagger || item.type.name.toLowerCase()
+			} else {
+				item.type = item.name.toLowerCase()
+			}
 		}
 	}
 	return newData
@@ -20,56 +25,34 @@ class Schema {
 	}
 
 	// data {name: '', schema: {}}
-	add = (data) => {
+	add = data => {
 		this.datas.push(data)
 	}
 
-	init = async ({hooks}) => {
-		try {
-			let schemas = {}, examples = {}
+	init = async ({ hooks }) => {
+		let schemas = {},
+			examples = {}
 
-			for (const {name, schema} of this.datas) {
-				let data = Object.assign({
-					// creator_name: {
-					// 	type: String,
-					// },
-					// creator_id: {
-					// 	type: String,
-					// },
-					// last_modifier_name: {
-					// 	type: String,
-					// },
-					// last_modifier_id: {
-					// 	type: String,
-					// },
-					created_date: {
-						type: Date,
-						typeSwagger: 'string',
-					},
-					updated_date: {
-						type: Date,
-						typeSwagger: 'string',
-					}
-				}, schema)
-
+		for (const { name, schema } of this.datas) {
+			try {
+				let data = schema(mongoose, mongoose.Schema)
 				// hook
-				if(hooks.onInitSchema) {
+				if (hooks.onInitSchema) {
 					let formatedData = await hooks.onInitSchema(name, data)
 					data = formatedData ? formatedData : data
 				}
 				// console.log('schema name:', name)
 				schemas[name] = data
 				examples[name] = exampleForamt(data)
-
+			} catch (error) {
+				console.warn(`Init Schemas Error: ${name}`, error)
+				throw error
 			}
+		}
 
-			return {
-				schemas,
-				examples
-			}
-		} catch (error) {
-			console.warn('Init Schemas Error', error)
-			throw error
+		return {
+			schemas,
+			examples
 		}
 	}
 }
