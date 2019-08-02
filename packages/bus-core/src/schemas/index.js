@@ -38,7 +38,7 @@ class Schema {
 				let data = schema(mongoose, mongoose.Schema)
 				// hook
 				if (hooks.onInitSchema) {
-					let formatedData = await hooks.onInitSchema(name, data)
+					let formatedData = await hooks.onInitSchema.call(this, name, data)
 					data = formatedData ? formatedData : data
 				}
 				// console.log('schema name:', name)

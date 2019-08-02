@@ -39,7 +39,7 @@ class Models {
 
 				// hook
 				if(hooks.onInitModels) {
-					let formatedSchema = await hooks.onInitModels(name, Schema)
+					let formatedSchema = await hooks.onInitModels.call(this, name, Schema)
 					Schema = formatedSchema ? formatedSchema : Schema
 				}
 

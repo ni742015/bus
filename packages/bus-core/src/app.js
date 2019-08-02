@@ -45,7 +45,7 @@ module.exports = function (router) {
 	// ]
 
 	if (onInitMiddlewares) {
-		middlewares = onInitMiddlewares(middlewares, app) || middlewares
+		middlewares = onInitMiddlewares.call(this, middlewares, app) || middlewares
 	}
 
 	for (const md of middlewares) {

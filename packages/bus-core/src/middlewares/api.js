@@ -31,7 +31,7 @@ module.exports = async function(ctx, next) {
 
 						ctx.state = undefined
 						if(this.hooks.onTokenCheck) {
-							ctx.state = await this.hooks.onTokenCheck(decode, ctx)
+							ctx.state = await this.hooks.onTokenCheck.call(this, decode, ctx)
 						}
 
 						ctx.state = ctx.state || decode || {}
@@ -49,7 +49,7 @@ module.exports = async function(ctx, next) {
 		}
 
 
-		if(!beforeApiEnter || await beforeApiEnter(ctx, next) !== false) {
+		if(!beforeApiEnter || await beforeApiEnter.call(this, ctx, next) !== false) {
 			//先去执行路由
 			await next()
 
@@ -84,7 +84,7 @@ module.exports = async function(ctx, next) {
 		// if(error instanceof ApiError){
 		ctx.response.status = error.status || 500
 		if(this.hooks.onApiError) {
-			this.hooks.onApiError(ctx, error)
+			this.hooks.onApiError.call(this, ctx, error)
 		}
 
 		!ctx.body && (ctx.body = {

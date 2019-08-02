@@ -16,7 +16,7 @@ class Mongo {
 		// 防止mongoose: mpromise错误
 		mongoose.Promise = global.Promise
 
-		hooks.onInitMongoose && hooks.onInitMongoose(mongoose)
+		hooks.onInitMongoose && hooks.onInitMongoose.call(this, mongoose)
 
 		db.on('error', (err) => {
 			console.error('mongoose connect error: ', err)

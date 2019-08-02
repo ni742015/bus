@@ -73,7 +73,7 @@ class Api {
 				}
 
 				if(hooks.onInitApi) {
-					await hooks.onInitApi(tagName, apiClass, args)
+					await hooks.onInitApi.call(this, tagName, apiClass, args)
 				}
 
 				const {commonApiConfig, ApiClass} = apiClass(args)
