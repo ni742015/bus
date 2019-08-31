@@ -6,7 +6,7 @@ const MwChain = require('./utils/mwChain')
 const errorHandel = require('./utils/errorHandel')
 const api_middleware = require('./middlewares/api')
 
-module.exports = function (router) {
+module.exports = async function (router) {
 	let {onInitMiddlewares, onError} = this.hooks
 	let {config} = this
 	let middlewares = []
@@ -45,7 +45,7 @@ module.exports = function (router) {
 	// ]
 
 	if (onInitMiddlewares) {
-		middlewares = onInitMiddlewares.call(this, middlewares, app) || middlewares
+		middlewares = await onInitMiddlewares.call(this, middlewares, app) || middlewares
 	}
 
 	for (const md of middlewares) {
