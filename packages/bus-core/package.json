@@ -1,6 +1,6 @@
 {
   "name": "bus-core",
-  "version": "0.2.3-alpha.2",
+  "version": "0.2.3-alpha.3",
   "description": "",
   "bin": {
     "bus": "bin/bus"
