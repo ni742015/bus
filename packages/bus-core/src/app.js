@@ -27,26 +27,10 @@ module.exports = async function (router) {
 		config.middlewares(mwChain)
 	}
 
-	middlewares = mwChain.getMiddlewares()
-	// let middlewares = [
-	// 	cors(),
-	// 	bodyparser({
-	// 		enableTypes:['json', 'form']
-	// 	}),
-	// 	json(),
-	// 	async (ctx, next) => {
-	// 		const start = new Date()
-	// 		await next()
-	// 		const ms = new Date() - start
-	// 		console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
-	// 	},
-	// 	api_middleware.bind(this),
-	// 	[router.routes(), router.allowedMethods()]
-	// ]
-
 	if (onInitMiddlewares) {
-		middlewares = await onInitMiddlewares.call(this, middlewares, app) || middlewares
+		mwChain = await onInitMiddlewares.call(this, mwChain, app) || mwChain
 	}
+	middlewares = mwChain.getMiddlewares()
 
 	for (const md of middlewares) {
 		if(Object.prototype.toString.call(md) === '[object Array]') {
