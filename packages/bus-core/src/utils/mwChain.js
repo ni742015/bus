@@ -19,7 +19,7 @@ class MiddlewareChain {
 		return this.mw.map(mw => mw.middleware(mw.opt))
 	}
 	add(mw, index) {
-		if(index && index >= 0) {
+		if(index !== undefined && index >= 0) {
 			this.mw.splice(index, 0, mw)
 		} else {
 			this.mw.push(mw)

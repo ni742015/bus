@@ -17,7 +17,7 @@ module.exports = async function (router) {
 			const start = new Date()
 			await next()
 			const ms = new Date() - start
-			console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+			console.log(`${start.toLocaleString()}: ${ctx.method} ${ctx.url} - ${ms}ms`)
 		}},
 		{name:'_auth', opt: {}, middleware: () => api_middleware.bind(this)},
 		{name:'_api', opt: {}, middleware: () => [router.routes(), router.allowedMethods()]},

@@ -30,9 +30,11 @@ const startServer = () => {
 	const serverPaths = Object
 		.keys(serverCompiler.options.entry)
 		.map(entry => path.join(serverCompiler.options.output.path, `${entry}.js`))
-	console.log('process.argv.slice(3)', process.argv.slice(3))
 
-	nodemon({ script: serverPaths[0], watch: serverPaths, nodeArgs: [...process.argv.slice(3)] })
+	const debugPort = process.argv[3]
+	console.log('process.argv.slice(2)', process.argv)
+
+	nodemon({ script: serverPaths[0], watch: serverPaths, nodeArgs: [`--inspect-brk=${debugPort || '5858'}`] })
 		.on('quit', process.exit)
 }
 

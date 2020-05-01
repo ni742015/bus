@@ -28,7 +28,7 @@ var resLogger = log4js.getLogger('result')
 //封装错误日志
 logUtil.logError = function (ctx, error, resTime) {
 	if (ctx && error) {
-		errorLogger.error(formatError(ctx, error, resTime))
+		resLogger.error(formatError(ctx, error, resTime))
 	}
 }
 
@@ -45,7 +45,7 @@ logUtil.log = function (text) {
 }
 
 logUtil.error = function (text) {
-	resLogger.error(text)
+	errorLogger.error(text)
 }
 
 //格式化响应日志
