@@ -37,6 +37,13 @@ program
     require(res('dev'))
   })
 
+program
+  .command('debug')
+  .description('run project')
+  .action(() => {
+    require(res('debug'))
+  })
+
 program.parse(process.argv)
 
 if(!program.args.length){
