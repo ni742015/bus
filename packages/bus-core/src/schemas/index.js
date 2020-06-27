@@ -6,11 +6,13 @@ function exampleForamt(data) {
 	for (const key in newData) {
 		if (newData.hasOwnProperty(key)) {
 			const item = newData[key]
-			// console.log(item);
-			if (item.type) {
+			// console.info('key, item', key, item)
+			if (typeof(item.type) === 'function') {
+				// console.info('item.type', item.type)
 				// typeSwagger
 				item.type = item.typeSwagger || item.type.name.toLowerCase()
 			} else {
+				// console.info('item.name', item.name)
 				item.type = item.name.toLowerCase()
 			}
 		}

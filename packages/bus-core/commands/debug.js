@@ -34,7 +34,7 @@ const startServer = () => {
 	const debugPort = process.argv[3]
 	console.log('process.argv.slice(2)', process.argv)
 
-	nodemon({ script: serverPaths[0], watch: serverPaths, nodeArgs: [`--inspect-brk=${debugPort || '5858'}`] })
+	nodemon({ script: serverPaths[0], watch: [], nodeArgs: [`--inspect-brk=${debugPort || '5858'}`] })
 		.on('quit', process.exit)
 }
 

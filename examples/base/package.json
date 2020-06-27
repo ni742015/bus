@@ -4,7 +4,8 @@
   "scripts": {
     "start": "node ./build/main.js",
     "dev": "bus dev",
-    "build": "bus build"
+    "build": "bus build",
+    "debug": "bus debug"
   },
   "license": "MIT",
   "dependencies": {
