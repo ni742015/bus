@@ -31,7 +31,7 @@
     "download-git-repo": "^1.1.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
     "glob": "^7.1.2",
-    "got": "^9.5.0",
+    "got": "^11.8.5",
     "inquirer": "^6.5.0",
     "json-loader": "^0.5.7",
     "jsonwebtoken": "^8.2.0",
